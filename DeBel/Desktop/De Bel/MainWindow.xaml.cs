@@ -29,6 +29,14 @@ namespace De_Bel
             lbTest.Items.Add(tbNaamInvoer.Text);
             tbNaamInvoer.Text = "";
         }
+        private void tbNaamInvoer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                lbTest.Items.Add(tbNaamInvoer.Text);
+                tbNaamInvoer.Text = "";
+            }
+        }
 
         private void lbTest_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
