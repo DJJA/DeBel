@@ -24,5 +24,11 @@ namespace De_Bel
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            lbTest.Items.Add("Loek");
+        }
+        
     }
 }

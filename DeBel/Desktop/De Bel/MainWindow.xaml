@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <ListBox x:Name="lbTest" HorizontalAlignment="Left" Height="250" Margin="29,46,0,0" VerticalAlignment="Top" Width="210"/>
+        <Image HorizontalAlignment="Left" Height="140" Margin="275,46,0,0" VerticalAlignment="Top" Width="170" Source="C:\Users\Loek\Desktop\FHICT\media\html\images\joyce.jpg"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="275,207,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.416,0.25" Click="Button_Click"/>
+
     </Grid>
 </Window>
