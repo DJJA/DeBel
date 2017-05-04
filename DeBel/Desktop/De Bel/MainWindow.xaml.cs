@@ -24,11 +24,31 @@ namespace De_Bel
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnInvoer_Click(object sender, RoutedEventArgs e)
         {
-            lbTest.Items.Add("Loek");
+            lbTest.Items.Add(tbNaamInvoer.Text);
+            tbNaamInvoer.Text = "";
         }
-        
+
+        private void lbTest_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string curItem = lbTest.SelectedItem.ToString();
+            lblNaam.Content = curItem;
+            if (curItem == "max")
+            {
+                picFoto.Source = new BitmapImage(new Uri(@"C:\Users\Loek\Desktop\FHICT\media\html\images\Max.jpg"));
+                lblEmail.Content = "e-mail";
+                lblTelnr.Content = "Telefoonnummer";
+            }
+            else if (curItem == "nalah")
+            {
+                picFoto.Source = new BitmapImage(new Uri(@"C:\Users\Loek\Desktop\FHICT\media\html\images\nalah.jpeg"));
+            }
+            else if (curItem == "dennis")
+            {
+                picFoto.Source = new BitmapImage(new Uri(@"C:\Users\Loek\Desktop\FHICT\media\html\images\dennis.jpg"));
+            }
+            else picFoto.Source = new BitmapImage(new Uri(@"C:\Users\Loek\Desktop\FHICT\media\html\images\no-image.jpg"));
+        }
     }
 }
