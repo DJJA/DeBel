@@ -1,0 +1,15 @@
+﻿<Window x:Class="testapp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:testapp"
+        mc:Ignorable="d"
+        Title="De Bel" Height="236.145" Width="405.241">
+    <Grid>
+        <TextBox Height="23" Margin="80,50,80,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+        <PasswordBox HorizontalAlignment="Left" Margin="80,78,0,0" VerticalAlignment="Top" Width="237" Height="23"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="157,106,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>
