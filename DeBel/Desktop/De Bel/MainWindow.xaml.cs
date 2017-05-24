@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace De_Bel
 {
     /// <summary>
@@ -20,9 +21,11 @@ namespace De_Bel
     /// </summary>
     public partial class MainWindow : Window
     {
+        UserWindow user = new UserWindow();
         public MainWindow()
         {
             InitializeComponent();
+            user.Show();
         }
         private void BtnInvoer_Click(object sender, RoutedEventArgs e)
         {
