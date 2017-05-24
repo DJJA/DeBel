@@ -22,6 +22,33 @@ namespace De_Bel
         public LoginWindow()
         {
             InitializeComponent();
+
+            tboxUsername.GotFocus += TboxUsername_GotFocus;
+            tboxUsername.LostFocus += TboxUsername_LostFocus;
+            TboxUsername_LostFocus(null, null);
+        }
+
+        private void TboxUsername_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(tboxUsername.Text))
+            {
+                tboxUsername.Foreground = Brushes.LightGray;
+                tboxUsername.Text = "Enter username...";
+            }
+        }
+
+        private void TboxUsername_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(tboxUsername.Text) || tboxUsername.Text == "Enter username...")
+            {
+                tboxUsername.Text = string.Empty;
+                tboxUsername.Foreground = Brushes.Black;
+            }
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
