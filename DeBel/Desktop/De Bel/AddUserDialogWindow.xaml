@@ -19,6 +19,5 @@
         <TextBlock HorizontalAlignment="Left" Margin="10,94,0,0" TextWrapping="Wrap" Text="Username:" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,122,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top"/>
         <PasswordBox Height="23" Margin="71,122,10,0" VerticalAlignment="Top"/>
-        <ListBox HorizontalAlignment="Left" Height="100" Margin="123,182,0,-13" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>
