@@ -13,9 +13,9 @@
                 <DataGridCheckBoxColumn Header=""></DataGridCheckBoxColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="404,12,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="404,12,0,0" VerticalAlignment="Top" Width="75"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Building:" VerticalAlignment="Top"/>
-        <Button x:Name="btnAddBuilding" Content="Add Building" HorizontalAlignment="Left" Margin="10,0,0,10" Width="100" Height="20" VerticalAlignment="Bottom" Click="btnAddBuilding_Click"/>
+        <Button x:Name="btnAddBuilding" Content="Add Building" HorizontalAlignment="Left" Margin="10,0,0,10" Width="100" Height="20" VerticalAlignment="Bottom"/>
         <Button x:Name="btnRemoveBuilding" Content="Remove Building" HorizontalAlignment="Left" Margin="115,0,0,10" VerticalAlignment="Bottom" Width="100"/>
         <Button x:Name="btnAddDoorbell" Content="Add Doorbell" HorizontalAlignment="Left" Margin="220,0,0,10" VerticalAlignment="Bottom" Width="100"/>
         <Button x:Name="btnRemoveDoorbell" Content="Remove Doorbell" HorizontalAlignment="Left" Margin="325,0,0,10" VerticalAlignment="Bottom" Width="100"/>

@@ -9,7 +9,9 @@
     <Grid>
         <TabControl>
             <TabItem Header="Log">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <local:LogControl/>
+                </Grid>
             </TabItem>
             <TabItem Header="Doorbells">
                 <Grid Background="#FFE5E5E5">
@@ -17,7 +19,9 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Users">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <local:UsersControl/>
+                </Grid>
             </TabItem>
             <TabItem Header="Errors">
                 <Grid Background="#FFE5E5E5"/>
