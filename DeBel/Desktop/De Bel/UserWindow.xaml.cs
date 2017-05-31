@@ -43,5 +43,10 @@ namespace De_Bel
             dataAdp.Update(dt);
             connection.Close();
         }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
