@@ -21,6 +21,33 @@ namespace De_Bel
     /// </summary>
     public partial class MainWindow : Window
     {
+        public List<Log> mLogEntries;
+        public List<Log> LogEntries
+        {
+            get { return mLogEntries; }
+            set
+            {
+                mLogEntries = value;
+                lbTest.ItemsSource = mLogEntries;
+            }
+        }
+
+        public List<Log> AddDataLabelsToMatchesList(List<Log> LogEntries)
+        {
+            //matches.Insert(0, new Match(-1, DateTime.Now.ToBinary(), DateTime.Now.ToBinary()));
+
+            DateTime lastDate = DateTime.MaxValue;
+            for (int i = 0; i < LogEntries.Count; i++)
+            {
+                if (lastDate.Date != LogEntries[i].DateTime.Date)
+                {
+                    lastDate = LogEntries[i].DateTime;
+                    LogEntries.Insert(i, new Log(LogType.None, lastDate, null, null));
+                }
+            }
+            return LogEntries;
+        }
+
         UserWindow user = new UserWindow();
         public MainWindow()
         {
