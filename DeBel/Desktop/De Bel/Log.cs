@@ -6,12 +6,6 @@ using System.Threading.Tasks;
 
 namespace De_Bel
 {
-    public enum LogType
-    {
-        Error,
-        DoorbellRinged,
-        None
-    }
     public class Log
     {
         public LogType Type { get; set; }
