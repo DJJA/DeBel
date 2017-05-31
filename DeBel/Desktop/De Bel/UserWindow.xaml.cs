@@ -25,28 +25,39 @@ namespace De_Bel
         public UserWindow()
         {
             InitializeComponent();
+            StartUp();
         }
         private static MySqlConnection connection = new MySqlConnection
         (@"Server=studmysql01.fhict.local;Uid=dbi338083;Database=dbi338083;Pwd=bossmonster;");
+        MySqlDataAdapter dataAdp;
+        DataTable dt;
+        MySqlCommandBuilder builder;
 
-        private void btnLoadTable_Click(object sender, RoutedEventArgs e)
+        private void StartUp()
         {
             connection.Open();
             string Query = "SELECT * FROM person";
             MySqlCommand createCommand = new MySqlCommand(Query, connection);
             createCommand.ExecuteNonQuery();
 
-            MySqlDataAdapter dataAdp = new MySqlDataAdapter(createCommand);
-            DataTable dt = new DataTable("person");
+            dataAdp = new MySqlDataAdapter(createCommand);
+            dt = new DataTable("person");
             dataAdp.Fill(dt);
             datagrid1.ItemsSource = dt.DefaultView;
             dataAdp.Update(dt);
             connection.Close();
         }
-
-        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        private void btnLoadTable_Click(object sender, RoutedEventArgs e)
         {
+            
+        }
 
+        private void btnUpdate_Click_1(object sender, RoutedEventArgs e)
+        {
+            builder = new MySqlCommandBuilder(dataAdp);
+            dataAdp.Update(dt);
+            MessageBox.Show("succes!");
+            StartUp();
         }
     }
 }
