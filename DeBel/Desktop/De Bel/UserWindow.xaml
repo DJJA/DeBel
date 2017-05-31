@@ -12,9 +12,6 @@
                 <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnLoadTable" Content="Load Database" HorizontalAlignment="Left" Margin="57,234,0,0" VerticalAlignment="Top" Width="94" Click="btnLoadTable_Click" Height="25"/>
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="277,234,0,0" VerticalAlignment="Top" Width="94" Click="btnLoadTable_Click" Height="25"/>
-        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="388,234,0,0" VerticalAlignment="Top" Width="94" Click="btnLoadTable_Click" Height="25"/>
-        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="168,234,0,0" VerticalAlignment="Top" Width="94" Click="btnLoadTable_Click" Height="25"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Height="25" Margin="282,234,0,0" VerticalAlignment="Top" Width="91" Click="btnUpdate_Click_1"/>
     </Grid>
 </Window>
