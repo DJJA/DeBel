@@ -117,10 +117,10 @@ namespace De_Bel
         public List<Building> GetBuildings()
         {
             var list = new List<Building>();
-            string query = "SELECT * FROM Building b, Building_Person bp WHERE b.ID = bp.Building_ID AND bp.Person_ID = @Person_ID;";
+            string query = "SELECT * FROM Building b, Buidling_Person bp WHERE b.ID = bp.Building_ID AND bp.Person_ID = @Person_ID;";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+            using (var connection = new MySqlConnection(connectionString))
+            using (var adapter = new MySqlDataAdapter(query, connection))
             {
                 connection.Open();
 

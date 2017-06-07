@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,8 +47,8 @@ namespace De_Bel
             var users = new List<User>();
             string query = "SELECT * FROM Person p, Building_Person bp WHERE p.ID = bp.Person_ID AND bp.Building_ID = @Building_ID";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+            using (var connection = new MySqlConnection(connectionString))
+            using (var adapter = new MySqlDataAdapter(query, connection))
             {
                 connection.Open();
 
@@ -77,10 +79,10 @@ namespace De_Bel
         public List<Doorbell> GetDoorbells(User usr)
         {
             var list = new List<Doorbell>();
-            string query = "SELECT * FROM DoorBell d, DoorBell_Person dp WHERE d.ID = dp.DoorBell_ID AND d.Building_ID = @Building_ID AND dp.Person_ID = @Person_ID";
+            string query = "SELECT * FROM DoorBell d, DoorBell_perosn dp WHERE d.ID = dp.DoorBell_ID AND d.Building_ID = @Building_ID AND dp.Person_ID = @Person_ID";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+            using (var connection = new MySqlConnection(connectionString))
+            using (var adapter = new MySqlDataAdapter(query, connection))
             {
                 connection.Open();
 
@@ -95,15 +97,20 @@ namespace De_Bel
                 {
                     try
                     {
-                        int id = Convert.ToInt32(dt.Rows[i]["ID"]);
+                        int id = Convert.ToInt32(dt.Rows[i]["doorbell_ID"]);
                         int buildingID = Convert.ToInt32(dt.Rows[i]["Building_ID"]);
-                        string name = (string)dt.Rows[i]["Name"];
+                        string name = (string)dt.Rows[i]["doorbellName"];
                         list.Add(new Doorbell(id, name, buildingID));
                     }
-                    catch (Exception ex) { }
+                    catch (Exception ex) { Debug.WriteLine(ex.Message); }
                 }
             }
             return list;
+        }
+
+        public override string ToString()
+        {
+            return Street + " " + HouseNumber;
         }
     }
 }

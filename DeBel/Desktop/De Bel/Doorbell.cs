@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -32,8 +33,8 @@ namespace De_Bel
             var list = new List<Log>();
             string query = "SELECT * FROM EventLog WHERE DoorBell_ID = @DoorBell_ID AND Error IS NOT NULL;";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+            using (var connection = new MySqlConnection(connectionString))
+            using (var adapter = new MySqlDataAdapter(query, connection))
             {
                 connection.Open();
 
@@ -64,8 +65,8 @@ namespace De_Bel
             var list = new List<Log>();
             string query = "SELECT * FROM EventLog WHERE DoorBell_ID = @DoorBell_ID;";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+            using (var connection = new MySqlConnection(connectionString))
+            using (var adapter = new MySqlDataAdapter(query, connection))
             {
                 connection.Open();
 
@@ -89,6 +90,11 @@ namespace De_Bel
                 }
             }
             return list;
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }
