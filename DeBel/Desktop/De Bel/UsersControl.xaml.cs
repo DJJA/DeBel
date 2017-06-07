@@ -25,7 +25,7 @@ namespace De_Bel
         public UsersControl()
         {
             InitializeComponent();
-            //StartUp();
+            StartUp();
         }
         private static MySqlConnection connection = new MySqlConnection
         (@"Server=studmysql01.fhict.local;Uid=dbi338083;Database=dbi338083;Pwd=bossmonster;");

@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:De_Bel"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="600">
+             d:DesignHeight="400" d:DesignWidth="600" Loaded="UserControl_Loaded">
     <Grid>
-        <ListBox x:Name="lbTest" HorizontalAlignment="Left" Height="250" Margin="29,46,0,0" VerticalAlignment="Top" Width="210" SelectionChanged="lbTest_SelectionChanged"/>
+        <ListBox x:Name="lbLog" HorizontalAlignment="Left" Margin="10,73,0,10" Width="210" SelectionChanged="lbLog_SelectionChanged"/>
         <Image x:Name="picFoto" HorizontalAlignment="Left" Height="140" Margin="275,46,0,0" VerticalAlignment="Top" Width="170"/>
         <Button x:Name="BtnInvoer" Content="Button" HorizontalAlignment="Left" Margin="433,277,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.416,0.25" Click="BtnInvoer_Click"/>
         <Label x:Name="lblTest" Content="Naam:" HorizontalAlignment="Left" Height="24" Margin="275,191,0,0" VerticalAlignment="Top" Width="47"/>
@@ -17,5 +17,9 @@
         <Label x:Name="lblNaam" Content="" HorizontalAlignment="Left" Height="24" Margin="327,191,0,0" VerticalAlignment="Top" Width="133"/>
         <Label x:Name="lblEmail" Content="" HorizontalAlignment="Left" Height="24" Margin="327,220,0,0" VerticalAlignment="Top" Width="133"/>
         <Label x:Name="lblTelnr" Content="" HorizontalAlignment="Left" Height="24" Margin="327,248,0,0" VerticalAlignment="Top" Width="133"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Building: " VerticalAlignment="Top" Height="22"/>
+        <ComboBox x:Name="cboxBuilding" HorizontalAlignment="Left" Margin="67,10,0,0" VerticalAlignment="Top" Width="153" SelectionChanged="cboxBuilding_SelectionChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,37,0,0" TextWrapping="Wrap" Text="Doorbell: " VerticalAlignment="Top" Height="22"/>
+        <ComboBox x:Name="cboxDoorbell" HorizontalAlignment="Left" Margin="67,37,0,0" VerticalAlignment="Top" Width="153" SelectionChanged="cboxDoorbell_SelectionChanged"/>
     </Grid>
 </UserControl>

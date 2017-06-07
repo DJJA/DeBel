@@ -43,5 +43,19 @@ namespace De_Bel
                 logType = "Doorbell Ringed";
             return DateTime.ToString("HH:mm:ss") + " - " + logType;
         }
+
+        public static List<Log> AddDataLabelsToMatchesList(List<Log> LogEntries)
+        {
+            DateTime lastDate = DateTime.MaxValue;
+            for (int i = 0; i < LogEntries.Count; i++)
+            {
+                if (lastDate.Date != LogEntries[i].DateTime.Date)
+                {
+                    lastDate = LogEntries[i].DateTime;
+                    LogEntries.Insert(i, new Log(-1, -1, lastDate, null, null));
+                }
+            }
+            return LogEntries;
+        }
     }
 }

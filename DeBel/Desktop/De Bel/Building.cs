@@ -14,12 +14,15 @@ namespace De_Bel
         public Company Company { get; set; }
         public string Street { get; set; }
         public string Zipcode { get; set; }
-        public string HouseNumber { get; set; }
+        public int HouseNumber { get; set; }
         public List<Doorbell> Doorbells { get; set; }
 
-        public Building()
+        public Building(int id, int companyId, string street, string zipcode, int housenumber)
         {
-
+            Id = id;
+            Street = street;
+            Zipcode = zipcode;
+            HouseNumber = housenumber;
         }
 
         public bool AddBuilding()
@@ -69,6 +72,38 @@ namespace De_Bel
                 }
             }
             return users;
+        }
+
+        public List<Doorbell> GetDoorbells(User usr)
+        {
+            var list = new List<Doorbell>();
+            string query = "SELECT * FROM DoorBell d, DoorBell_Person dp WHERE d.ID = dp.DoorBell_ID AND d.Building_ID = @Building_ID AND dp.Person_ID = @Person_ID";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+            {
+                connection.Open();
+
+                adapter.SelectCommand.Parameters.AddWithValue("@Building_ID", Id);
+                adapter.SelectCommand.Parameters.AddWithValue("@Person_ID", usr.Id);
+
+
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    try
+                    {
+                        int id = Convert.ToInt32(dt.Rows[i]["ID"]);
+                        int buildingID = Convert.ToInt32(dt.Rows[i]["Building_ID"]);
+                        string name = (string)dt.Rows[i]["Name"];
+                        list.Add(new Doorbell(id, name, buildingID));
+                    }
+                    catch (Exception ex) { }
+                }
+            }
+            return list;
         }
     }
 }

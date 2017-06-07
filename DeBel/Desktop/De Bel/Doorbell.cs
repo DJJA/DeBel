@@ -16,11 +16,10 @@ namespace De_Bel
         public List<User> Users { get; set; }
         public List<Log> Logs { get; set; }
 
-        public Doorbell(int id, string name, Building b)
+        public Doorbell(int id, string name, int buildingID)
         {
             Id = id;
             Name = name;
-            Building = b;
         }
 
         public static bool UpdateDoorbells(DataTable dt)
