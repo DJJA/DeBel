@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,7 +64,7 @@ namespace De_Bel
         public List<Log> GetLog()
         {
             var list = new List<Log>();
-            string query = "SELECT * FROM EventLog WHERE DoorBell_ID = @DoorBell_ID;";
+            string query = "SELECT * FROM EventLog WHERE DoorBell_ID = @DoorBell_ID ORDER BY EventDate DESC;";
 
             using (var connection = new MySqlConnection(connectionString))
             using (var adapter = new MySqlDataAdapter(query, connection))
@@ -81,12 +82,20 @@ namespace De_Bel
                     {
                         int doorbellId = Convert.ToInt32(dt.Rows[i]["DoorBell_ID"]);
                         int userId = Convert.ToInt32(dt.Rows[i]["Person_ID"]);
-                        DateTime dateTime = new DateTime(Convert.ToInt64(dt.Rows[i]["EventDate"]));
-                        string picturePath = (string)dt.Rows[i]["Picture"];
-                        string errorMessage = (string)dt.Rows[i]["Error"];
+                        DateTime dateTime = Convert.ToDateTime(dt.Rows[i]["EventDate"]);
+
+                        string picturePath = null, errorMessage = null;
+
+                        object o = dt.Rows[i]["Picture"];
+                        if(o!= DBNull.Value)
+                            picturePath = (string)o;
+                        o = dt.Rows[i]["ErrorMsg"];
+                        if (o != DBNull.Value)
+                            errorMessage = (string)o;
+
                         list.Add(new Log(doorbellId, userId, dateTime, picturePath, errorMessage));
                     }
-                    catch (Exception ex) { }
+                    catch (Exception ex) { Debug.WriteLine(ex.Message); }
                 }
             }
             return list;
