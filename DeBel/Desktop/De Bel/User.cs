@@ -85,7 +85,7 @@ namespace De_Bel
                 MySqlCommandBuilder builder = new MySqlCommandBuilder(dataAdp);
                 dataAdp.Update(dt);
             }
-            catch (Exception ex)
+            catch (Exception)
             { update = false; }
             return update;
         }

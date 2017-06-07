@@ -48,6 +48,27 @@ namespace De_Bel
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            CheckLogin();
+        }
+
+        private void tboxPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                CheckLogin();
+            }
+        }
+
+        private void tboxUsername_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                CheckLogin();
+            }
+        }
+
+        public void CheckLogin()
+        {
             User LoginCheck = User.LogInCheck(tboxUsername.Text, tboxPassword.Password);
             if (LoginCheck != null)
             {
@@ -57,36 +78,6 @@ namespace De_Bel
                 this.Close();
             }
             else MessageBox.Show("Username and Password don't match");
-        }
-
-        private void tboxPassword_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                User LoginCheck = User.LogInCheck(tboxUsername.Text, tboxPassword.Password);
-                if (LoginCheck != null)
-                {
-                    Dashboard dashboard = new Dashboard();
-                    Dashboard.User = LoginCheck;
-                    dashboard.Show();
-                    this.Close();
-                }
-            }
-        }
-
-        private void tboxUsername_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                User LoginCheck = User.LogInCheck(tboxUsername.Text, tboxPassword.Password);
-                if (LoginCheck != null)
-                {
-                    Dashboard dashboard = new Dashboard();
-                    Dashboard.User = LoginCheck;
-                    dashboard.Show();
-                    this.Close();
-                }
-            }
         }
     }
 }
