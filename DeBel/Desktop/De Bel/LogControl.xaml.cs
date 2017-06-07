@@ -32,37 +32,7 @@ namespace De_Bel
 
         }
 
-        public List<Building> GetBuildings()
-        {
-            var list = new List<Building>();
-            string query = "SELECT * FROM Building b, Building_Person bp WHERE b.ID = bp.Building_ID AND bp.Person_ID = @Person_ID;";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
-            {
-                connection.Open();
-
-                adapter.SelectCommand.Parameters.AddWithValue("@Person_ID", Id);
-
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    try
-                    {
-                        int id = Convert.ToInt32(dt.Rows[i]["ID"]);
-                        int companyID = Convert.ToInt32(dt.Rows[i]["Company_ID"]);
-                        string street = (string)dt.Rows[i]["Street"];
-                        string zipcode = (string)dt.Rows[i]["Zipcode"];
-                        int houseNumber = Convert.ToInt32(dt.Rows[i]["HouseNumber"]);
-                        list.Add(new Building(id, companyID, street, zipcode, houseNumber));
-                    }
-                    catch (Exception ex) { }
-                }
-            }
-            return list;
-        }
+        
 
         private void cboxBuilding_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
