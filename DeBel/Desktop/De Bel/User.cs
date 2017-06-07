@@ -74,11 +74,15 @@ namespace De_Bel
             return dt;
         }
 
-        public static bool UpdateUsers(DataTable dt, MySqlDataAdapter dataAdp)
+        public static bool UpdateUsers(DataTable dt)
         {
             bool update = true;
             try
             {
+                MySqlDataAdapter dataAdp;
+                string Query = "SELECT * FROM person";
+                MySqlCommand createCommand = new MySqlCommand(Query, connection);
+                dataAdp = new MySqlDataAdapter(createCommand);
                 MySqlCommandBuilder builder = new MySqlCommandBuilder(dataAdp);
                 dataAdp.Update(dt);
             }
