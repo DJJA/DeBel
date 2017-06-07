@@ -43,8 +43,8 @@ namespace De_Bel
             if (dtbl.Rows.Count == 1)
             {
 
-                int id = Convert.ToInt32(dtbl.Rows[0]["Person_ID"]);
-                string name = (string)dtbl.Rows[0]["Name"];
+                int id = Convert.ToInt32(dtbl.Rows[0]["ID"]);
+                string name = (string)dtbl.Rows[0]["PersonName"];
                 string email = (string)dtbl.Rows[0]["EMail"];
                 int phoneNumber = Convert.ToInt32(dtbl.Rows[0]["PhoneNumber"]);
                 string usrname = (string)dtbl.Rows[0]["Username"];
