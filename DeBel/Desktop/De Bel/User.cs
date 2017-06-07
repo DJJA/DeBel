@@ -42,7 +42,15 @@ namespace De_Bel
             sda.Fill(dtbl);
             if (dtbl.Rows.Count == 1)
             {
-                return new User(id,name,email,username,password,phonenumber,adminstatus);
+
+                int id = Convert.ToInt32(dtbl.Rows[0]["Person_ID"]);
+                string name = (string)dtbl.Rows[0]["Name"];
+                string email = (string)dtbl.Rows[0]["EMail"];
+                int phoneNumber = Convert.ToInt32(dtbl.Rows[0]["PhoneNumber"]);
+                string usrname = (string)dtbl.Rows[0]["Username"];
+                string pssword = (string)dtbl.Rows[0]["PersonPassword"];
+                bool adminStatus = Convert.ToBoolean(dtbl.Rows[0]["AdminStatus"]);
+                return new User(id, name, email, usrname, pssword, phoneNumber, adminStatus);
             }
             return null;
         }
