@@ -56,6 +56,7 @@ namespace De_Bel
                 dashboard.Show();
                 this.Close();
             }
+            else MessageBox.Show("Username and Password don't match");
         }
 
         private void tboxPassword_KeyDown(object sender, KeyEventArgs e)

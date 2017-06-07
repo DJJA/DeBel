@@ -45,7 +45,6 @@ namespace De_Bel
             sda.Fill(dtbl);
             if (dtbl.Rows.Count == 1)
             {
-
                 int id = Convert.ToInt32(dtbl.Rows[0]["ID"]);
                 string name = (string)dtbl.Rows[0]["PersonName"];
                 string email = (string)dtbl.Rows[0]["EMail"];
