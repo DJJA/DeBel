@@ -48,7 +48,7 @@ namespace De_Bel
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-
+            User LoginCheck = User.LogInCheck(tboxUsername.Text, tboxPassword.Password);
         }
     }
 }
