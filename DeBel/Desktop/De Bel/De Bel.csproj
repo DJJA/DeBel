@@ -57,10 +57,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Building.cs" />
+    <Compile Include="Company.cs" />
     <Compile Include="Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Database.cs" />
+    <Compile Include="Doorbell.cs" />
     <Compile Include="DoorbellsControl.xaml.cs">
       <DependentUpon>DoorbellsControl.xaml</DependentUpon>
     </Compile>
