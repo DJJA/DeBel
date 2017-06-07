@@ -29,7 +29,7 @@ namespace De_Bel
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-
+            cboxBuilding.ItemsSource = Dashboard.User.GetBuildings();
         }
 
         
@@ -37,7 +37,7 @@ namespace De_Bel
         private void cboxBuilding_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var building = (Building)e.AddedItems[0];
-            cboxDoorbell.ItemsSource = building.GetDoorbells(null);
+            cboxDoorbell.ItemsSource = building.GetDoorbells(Dashboard.User);
         }
 
         private void cboxDoorbell_SelectionChanged(object sender, SelectionChangedEventArgs e)
