@@ -22,21 +22,17 @@ namespace De_Bel
     /// </summary>
     public partial class UsersControl : UserControl
     {
+        DataTable dt;
         public UsersControl()
         {
             InitializeComponent();
-            DataTable dt = User.GetUsers();
+            dt = User.GetUsers();
             datagrid1.ItemsSource = dt.DefaultView;
-            //StartUp();
         }
-
-        MySqlDataAdapter dataAdp;
-        DataTable dt;
-        MySqlCommandBuilder builder;
 
         private void btnUpdate_Click_1(object sender, RoutedEventArgs e)
         {
-            bool updateCheck = User.UpdateUsers(dt, dataAdp);
+            bool updateCheck = User.UpdateUsers(dt);
             if (updateCheck == true)
             {
                 User.GetUsers();
