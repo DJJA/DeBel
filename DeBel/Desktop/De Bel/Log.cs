@@ -8,14 +8,25 @@ namespace De_Bel
 {
     public class Log
     {
+        public int DoorbellId { get; set; }
+        public int UserId { get; set; }
         public LogType Type { get; set; }
         public DateTime DateTime { get; set; }
         public string PicturePath { get; set; }
         public string ErrorMessage { get; set; }
 
-        public Log(LogType type, DateTime dateTime, string picturePath, string errorMessage)
+        public Log(int doorbellId, int userId, DateTime dateTime, string picturePath, string errorMessage)
         {
-            Type = type;
+            DoorbellId = doorbellId;
+            UserId = userId;
+
+            if (String.IsNullOrEmpty(picturePath) && String.IsNullOrEmpty(errorMessage))
+                Type = LogType.None;
+            else if (String.IsNullOrEmpty(errorMessage))
+                Type = LogType.DoorbellRinged;
+            else
+                Type = LogType.Error;
+
             DateTime = dateTime;
             PicturePath = picturePath;
             ErrorMessage = errorMessage;
