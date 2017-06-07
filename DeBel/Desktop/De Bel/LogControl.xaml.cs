@@ -25,29 +25,30 @@ namespace De_Bel
         public LogControl()
         {
             InitializeComponent();
-            
+
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
-        
+
 
         private void cboxBuilding_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(e.AddedItems.Count > 0)
-            {
-                var building = (Building)e.AddedItems[0];
-                cboxDoorbell.ItemsSource = building.GetDoorbells(Dashboard.User);
-            }
+            var building = (Building)e.AddedItems[0];
+            cboxDoorbell.ItemsSource = building.GetDoorbells(Dashboard.User);
+            if (cboxDoorbell.Items.Count > 0)
+                cboxDoorbell.SelectedIndex = 0;
         }
 
         private void cboxDoorbell_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var doorbell = (Doorbell)e.AddedItems[0];
             lbLog.ItemsSource = Log.AddDataLabelsToMatchesList(doorbell.GetLog());
+            if (lbLog.Items.Count > 1)
+                lbLog.SelectedIndex = 1;
         }
 
         private void lbLog_SelectionChanged(object sender, SelectionChangedEventArgs e)
