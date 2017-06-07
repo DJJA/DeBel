@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:De_Bel"
         mc:Ignorable="d"
-        Title="Dashboard" Height="500" Width="800">
+        Title="Dashboard" Height="500" Width="800" ContentRendered="Window_ContentRendered">
     <Grid>
         <TabControl>
             <TabItem Header="Log">
                 <Grid Background="#FFE5E5E5">
-                    <local:LogControl/>
+                    <local:LogControl x:Name="tabLogControl"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Doorbells">

@@ -24,5 +24,10 @@ namespace De_Bel
         {
             InitializeComponent();
         }
+
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+            tabLogControl.cboxBuilding.ItemsSource = Dashboard.User.GetBuildings();
+        }
     }
 }
