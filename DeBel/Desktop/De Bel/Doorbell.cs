@@ -25,7 +25,7 @@ namespace De_Bel
 
         public static bool UpdateDoorbells(DataTable dt)
         {
-            return null;
+            return false;
         }
 
         public List<Log> GetErrors()

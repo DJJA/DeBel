@@ -24,17 +24,17 @@ namespace De_Bel
 
         public bool AddBuilding()
         {
-            return null;
+            return false;
         }
 
         public bool UpdateBuilding()
         {
-            return null
+            return false;
         }
 
         public static bool RemoveBuilding(Building b)
         {
-            return null;
+            return false;
         }
 
         public List<User> GetUsers()
