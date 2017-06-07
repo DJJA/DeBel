@@ -52,6 +52,7 @@ namespace De_Bel
             if (LoginCheck != null)
             {
                 Dashboard dashboard = new Dashboard();
+                Dashboard.User = LoginCheck;
                 dashboard.Show();
                 this.Close();
             }
