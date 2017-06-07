@@ -57,5 +57,35 @@ namespace De_Bel
                 this.Close();
             }
         }
+
+        private void tboxPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                User LoginCheck = User.LogInCheck(tboxUsername.Text, tboxPassword.Password);
+                if (LoginCheck != null)
+                {
+                    Dashboard dashboard = new Dashboard();
+                    Dashboard.User = LoginCheck;
+                    dashboard.Show();
+                    this.Close();
+                }
+            }
+        }
+
+        private void tboxUsername_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                User LoginCheck = User.LogInCheck(tboxUsername.Text, tboxPassword.Password);
+                if (LoginCheck != null)
+                {
+                    Dashboard dashboard = new Dashboard();
+                    Dashboard.User = LoginCheck;
+                    dashboard.Show();
+                    this.Close();
+                }
+            }
+        }
     }
 }
