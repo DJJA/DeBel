@@ -24,17 +24,17 @@ namespace De_Bel
 
         public bool AddBuilding()
         {
-
+            return null;
         }
 
         public bool UpdateBuilding()
         {
-
+            return null
         }
 
         public static bool RemoveBuilding(Building b)
         {
-
+            return null;
         }
 
         public List<User> GetUsers()
@@ -63,7 +63,7 @@ namespace De_Bel
                         string username = (string)dt.Rows[i]["Username"];
                         string password = (string)dt.Rows[i]["PersonPassword"];
                         bool adminStatus = Convert.ToBoolean(dt.Rows[i]["AdminStatus"]);
-                        users.Add(new User());
+                        users.Add(new User(id, name, email, username, password, phoneNumber, adminStatus));
                     }
                     catch (Exception ex) { }
                 }
