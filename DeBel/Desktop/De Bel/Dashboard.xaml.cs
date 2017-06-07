@@ -19,6 +19,7 @@ namespace De_Bel
     /// </summary>
     public partial class Dashboard : Window
     {
+        public static User User { get; set; }
         public Dashboard()
         {
             InitializeComponent();
