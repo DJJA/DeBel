@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace De_Bel
 {
-    public static class Database
+    public abstract class Database
     {
-        private static string connectionString = "";
-
-        private User LogInCheck(string username, string password)
-        {
-            return null;
-        }
+        protected static readonly string connectionString = "";
     }
 }
