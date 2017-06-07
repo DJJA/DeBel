@@ -9,9 +9,7 @@
     <Grid>
         <ListBox x:Name="lbLog" HorizontalAlignment="Left" Margin="10,73,0,10" Width="210" SelectionChanged="lbLog_SelectionChanged"/>
         <Image x:Name="picFoto" HorizontalAlignment="Left" Height="140" Margin="275,46,0,0" VerticalAlignment="Top" Width="170"/>
-        <Button x:Name="BtnInvoer" Content="Button" HorizontalAlignment="Left" Margin="433,277,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.416,0.25" Click="BtnInvoer_Click"/>
         <Label x:Name="lblTest" Content="Naam:" HorizontalAlignment="Left" Height="24" Margin="275,191,0,0" VerticalAlignment="Top" Width="47"/>
-        <TextBox x:Name="tbNaamInvoer" HorizontalAlignment="Left" Height="24" Margin="275,272,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" SpellCheck.IsEnabled="True" KeyDown="tbNaamInvoer_KeyDown"/>
         <Label x:Name="lblTest3" Content="Telnr.:" HorizontalAlignment="Left" Height="24" Margin="275,248,0,0" VerticalAlignment="Top" Width="47"/>
         <Label x:Name="lblTest2" Content="E-mail:" HorizontalAlignment="Left" Height="24" Margin="275,220,0,0" VerticalAlignment="Top" Width="47"/>
         <Label x:Name="lblNaam" Content="" HorizontalAlignment="Left" Height="24" Margin="327,191,0,0" VerticalAlignment="Top" Width="133"/>
