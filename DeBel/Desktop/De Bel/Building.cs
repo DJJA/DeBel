@@ -20,19 +20,19 @@ namespace De_Bel
 
         }
 
-        public bool AddBuilding()
-        {
+        //public bool AddBuilding()
+        //{
 
-        }
+        //}
 
-        public bool UpdateBuilding()
-        {
+        //public bool UpdateBuilding()
+        //{
 
-        }
+        //}
 
-        public static bool RemoveBuilding(Building b)
-        {
+        //public static bool RemoveBuilding(Building b)
+        //{
 
-        }
+        //}
     }
 }

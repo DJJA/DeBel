@@ -20,19 +20,19 @@ namespace De_Bel
 
         }
 
-        public static bool UpdateDoorbells(DataTable dt)
-        {
+        //public static bool UpdateDoorbells(DataTable dt)
+        //{
 
-        }
+        //}
 
-        public List<Log> GetErrors()
-        {
+        //public List<Log> GetErrors()
+        //{
 
-        }
+        //}
 
-        public List<Log> GetLog()
-        {
+        //public List<Log> GetLog()
+        //{
 
-        }
+        //}
     }
 }
