@@ -41,7 +41,7 @@ namespace De_Bel
                 if (lastDate.Date != LogEntries[i].DateTime.Date)
                 {
                     lastDate = LogEntries[i].DateTime;
-                    //LogEntries.Insert(i, new Log(LogType.None, lastDate, null, null));
+                    LogEntries.Insert(i, new Log(-1, -1, lastDate, null, null));
                 }
             }
             return LogEntries;
