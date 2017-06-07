@@ -20,6 +20,9 @@ namespace De_Bel
         public bool AdminStatus { get; set; }
         public List<Doorbell> Doorbells { get; set; }
 
+        
+        MySqlCommandBuilder builder;
+
         private static MySqlConnection connection = new MySqlConnection
         (@"Server=studmysql01.fhict.local;Uid=dbi338083;Database=dbi338083;Pwd=bossmonster;");
 
@@ -57,26 +60,32 @@ namespace De_Bel
 
         public static DataTable GetUsers()
         {
+            MySqlDataAdapter dataAdp;
             DataTable dt;
-            string query = "SELECT * FROM Person";
+            connection.Open();
+            string Query = "SELECT * FROM person";
+            MySqlCommand createCommand = new MySqlCommand(Query, connection);
+            createCommand.ExecuteNonQuery();
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
-            {
-                connection.Open();
-
-                //adapter.SelectCommand.Parameters.AddWithValue("@FilterValue", filterValue);
-
-                dt = new DataTable();
-                adapter.Fill(dt);
-            }
+            dataAdp = new MySqlDataAdapter(createCommand);
+            dt = new DataTable("person");
+            dataAdp.Fill(dt);
+            connection.Close();
             return dt;
         }
 
-        //public static bool UpdateUsers(DataTable dt)
-        //{
-
-        //}
+        public static bool UpdateUsers(DataTable dt, MySqlDataAdapter dataAdp)
+        {
+            bool update = true;
+            try
+            {
+                MySqlCommandBuilder builder = new MySqlCommandBuilder(dataAdp);
+                dataAdp.Update(dt);
+            }
+            catch (Exception ex)
+            { update = false; }
+            return update;
+        }
 
         //public static List<Doorbell> GetDoorbells(Building b)
         //{
