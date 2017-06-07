@@ -25,41 +25,22 @@ namespace De_Bel
         public UsersControl()
         {
             InitializeComponent();
-            StartUp();
+            DataTable dt = User.GetUsers();
+            datagrid1.ItemsSource = dt.DefaultView;
+            //StartUp();
         }
-        private static MySqlConnection connection = new MySqlConnection
-        (@"Server=studmysql01.fhict.local;Uid=dbi338083;Database=dbi338083;Pwd=bossmonster;");
+
         MySqlDataAdapter dataAdp;
         DataTable dt;
         MySqlCommandBuilder builder;
 
-        private void StartUp()
-        {
-            connection.Open();
-            string Query = "SELECT * FROM person";
-            MySqlCommand createCommand = new MySqlCommand(Query, connection);
-            createCommand.ExecuteNonQuery();
-
-            dataAdp = new MySqlDataAdapter(createCommand);
-            dt = new DataTable("person");
-            dataAdp.Fill(dt);
-            datagrid1.ItemsSource = dt.DefaultView;
-            dataAdp.Update(dt);
-            connection.Close();
-        }
-
         private void btnUpdate_Click_1(object sender, RoutedEventArgs e)
         {
-            try
+            bool updateCheck = User.UpdateUsers(dt, dataAdp);
+            if (updateCheck == true)
             {
-                builder = new MySqlCommandBuilder(dataAdp);
-                dataAdp.Update(dt);
-                MessageBox.Show("succes!");
-                StartUp();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Voer alle velden in");
+                User.GetUsers();
+                MessageBox.Show("succes");
             }
         }
     }
