@@ -116,16 +116,17 @@ namespace De_Bel
         public List<Building> GetBuildings()
         {
             var list = new List<Building>();
-            string query = "SELECT * FROM Building b, Buidling_Person bp WHERE b.ID = bp.Building_ID AND bp.Person_ID = @Person_ID;";
+            //string query = "SELECT * FROM Building b, Buidling_Person bp WHERE b.ID = bp.Building_ID AND bp.Person_ID = @Person_ID;";
+            string query = "SELECT * FROM Building;";
 
             using (var connection = new MySqlConnection(connectionString))
             using (var adapter = new MySqlDataAdapter(query, connection))
             {
                 connection.Open();
 
-                adapter.SelectCommand.Parameters.AddWithValue("@Person_ID", Id);
+                //adapter.SelectCommand.Parameters.AddWithValue("@Person_ID", Id);
 
-                DataTable dt = new DataTable();
+                var dt = new DataTable();
                 adapter.Fill(dt);
 
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -133,11 +134,12 @@ namespace De_Bel
                     try
                     {
                         int id = Convert.ToInt32(dt.Rows[i]["ID"]);
-                        int companyID = Convert.ToInt32(dt.Rows[i]["Company_ID"]);
+                        //int companyID = Convert.ToInt32(dt.Rows[i]["Company_ID"]);
                         string street = (string)dt.Rows[i]["Street"];
                         string zipcode = (string)dt.Rows[i]["Zipcode"];
                         int houseNumber = Convert.ToInt32(dt.Rows[i]["HouseNumber"]);
-                        list.Add(new Building(id, companyID, street, zipcode, houseNumber));
+                        //var houseNumber = (string)dt.Rows[i]["HouseNumber"];
+                        list.Add(new Building(id, -1, street, zipcode, houseNumber));
                     }
                     catch (Exception) { }
                 }

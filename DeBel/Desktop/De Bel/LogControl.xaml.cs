@@ -37,6 +37,7 @@ namespace De_Bel
 
         private void cboxBuilding_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             var building = (Building)e.AddedItems[0];
             cboxDoorbell.ItemsSource = building.GetDoorbells(Dashboard.User);
             if (cboxDoorbell.Items.Count > 0)
@@ -45,15 +46,23 @@ namespace De_Bel
 
         private void cboxDoorbell_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var doorbell = (Doorbell)e.AddedItems[0];
-            lbLog.ItemsSource = Log.AddDataLabelsToMatchesList(doorbell.GetLog());
-            if (lbLog.Items.Count > 1)
-                lbLog.SelectedIndex = 1;
+            if (e.AddedItems.Count > 0)
+            {
+                var doorbell = (Doorbell)e.AddedItems[0];
+                lbLog.ItemsSource = Log.AddDataLabelsToMatchesList(doorbell.GetLog());
+                if (lbLog.Items.Count > 1)
+                    lbLog.SelectedIndex = 1;
+            }
+            else lbLog.ItemsSource = null;
         }
 
         private void lbLog_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var log = (Log)e.AddedItems[0];
+            if (e.AddedItems.Count > 0)
+            {
+                var log = (Log)e.AddedItems[0];
+
+            }
 
         }
     }

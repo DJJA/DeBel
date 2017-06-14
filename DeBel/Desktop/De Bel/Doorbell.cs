@@ -14,7 +14,7 @@ namespace De_Bel
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Building Building { get; set; }
+        public int BuildingId { get; set; }
         public List<User> Users { get; set; }
         public List<Log> Logs { get; set; }
 
@@ -22,11 +22,37 @@ namespace De_Bel
         {
             Id = id;
             Name = name;
+            BuildingId = buildingID;
         }
 
         public static bool UpdateDoorbells(DataTable dt)
         {
             return false;
+        }
+
+        public bool AddDoorbell()
+        {
+            bool success = true;
+            try
+            {
+                string query = "INSERT INTO Doorbell(Building_ID, DoorbellName) VALUES(@Building_ID, @DoorbellName)";
+
+                using (var connection = new MySqlConnection(connectionString))
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@Building_ID", BuildingId);
+                    command.Parameters.AddWithValue("@DoorbellName", Name);
+
+                    command.ExecuteNonQuery();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                success = false;
+            }
+            return success;
         }
 
         public List<Log> GetErrors()

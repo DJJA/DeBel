@@ -31,7 +31,16 @@ namespace De_Bel
             dialog.ShowDialog();
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
             {
-
+                int i = 0;
+                int.TryParse(dialog.HouseNumber, out i);
+                var building = new Building(-1, -1, dialog.Street, dialog.Zipcode, i);
+                if (building.AddBuilding())
+                {
+                    LoadBuildingsInCombobox();
+                    MessageBox.Show("Building added to the database.");
+                }
+                else
+                    MessageBox.Show("Error: Could not add building to database.");
             }
             else
                 MessageBox.Show("Cancel");
@@ -44,7 +53,12 @@ namespace De_Bel
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
             {
                 var doorbell = new Doorbell(-1, dialog.DoorbellName, ((Building)cbboxBuildings.SelectedItem).Id);
-                
+                if (doorbell.AddDoorbell())
+                {
+                    MessageBox.Show("Doorbell added to the database.");
+                }
+                else MessageBox.Show("Error: Could not add doorbell to database.");
+
             }
             else
                 MessageBox.Show("Cancel");
@@ -59,10 +73,16 @@ namespace De_Bel
 
         private void cbboxBuildings_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(e.AddedItems.Count > 0)
+            if (e.AddedItems.Count > 0)
             {
                 var building = (Building)e.AddedItems[0];
-                dgGrid.ItemsSource = building.Doorbells;
+                //dgGrid.ItemsSource = building.Doorbells;
+                dgGrid.Columns.Clear();
+                for (int i = 0; i < building.Doorbells.Count; i++)
+                {
+                    var col = new DataGridCheckBoxColumn();
+
+                }
             }
         }
     }

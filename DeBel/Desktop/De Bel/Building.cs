@@ -38,7 +38,29 @@ namespace De_Bel
 
         public bool AddBuilding()
         {
-            return false;
+            bool success = true;
+            try
+            {
+                //return false;
+                string query = "INSERT INTO Building(Street, Zipcode, HouseNumber) VALUES(@Street, @Zipcode, @HouseNumber)";
+
+                using (var connection = new MySqlConnection(connectionString))
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@Street", Street);
+                    command.Parameters.AddWithValue("@Zipcode", Zipcode);
+                    command.Parameters.AddWithValue("@HouseNumber", HouseNumber);
+
+                    command.ExecuteNonQuery();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                success = false;
+            }
+            return success;
         }
 
         public bool UpdateBuilding()
