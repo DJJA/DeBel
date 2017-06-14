@@ -73,6 +73,34 @@ namespace De_Bel
             return dt;
         }
 
+        public static List<User> GetUsersAsList()
+        {
+            var list = new List<User>();
+            string query = "SELECT * FROM Person";
+
+            using (var connection = new MySqlConnection(connectionString))
+            using (var adapter = new MySqlDataAdapter(query, connection))
+            {
+                connection.Open();
+
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    int id = Convert.ToInt32(dt.Rows[i]["ID"]);
+                    string name = (string)dt.Rows[i]["PersonName"];
+                    string email = (string)dt.Rows[i]["EMail"];
+                    int phoneNumber = Convert.ToInt32(dt.Rows[i]["PhoneNumber"]);
+                    string usrname = (string)dt.Rows[i]["Username"];
+                    string pssword = (string)dt.Rows[i]["PersonPassword"];
+                    bool adminStatus = Convert.ToBoolean(dt.Rows[i]["AdminStatus"]);
+                    list.Add(new User(id, name, email, usrname, pssword, phoneNumber, adminStatus));
+                }
+            }
+            return list;
+        }
+
         public static bool UpdateUsers(DataTable dt)
         {
             bool update = true;

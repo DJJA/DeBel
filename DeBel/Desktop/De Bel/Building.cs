@@ -76,7 +76,7 @@ namespace De_Bel
         public List<User> GetUsers()
         {
             var users = new List<User>();
-            string query = "SELECT * FROM Person p, Building_Person bp WHERE p.ID = bp.Person_ID AND bp.Building_ID = @Building_ID";
+            string query = "SELECT * FROM Person p, Buidling_Person bp WHERE p.ID = bp.Person_ID AND bp.Building_ID = @Building_ID";
 
             using (var connection = new MySqlConnection(connectionString))
             using (var adapter = new MySqlDataAdapter(query, connection))

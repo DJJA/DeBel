@@ -83,6 +83,11 @@ namespace De_Bel
                     var col = new DataGridCheckBoxColumn();
 
                 }
+                var users = building.GetUsers();
+                foreach (var user in users)
+                {
+                    dgGrid.Items.Add(user);
+                }
             }
         }
     }
