@@ -20,6 +20,7 @@ namespace De_Bel
     public partial class Dashboard : Window
     {
         public static User User { get; set; }
+        public static Doorbell doorbell { get;set; }
         public Dashboard()
         {
             InitializeComponent();
