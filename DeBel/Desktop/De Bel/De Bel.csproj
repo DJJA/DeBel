@@ -70,6 +70,7 @@
     </Compile>
     <Compile Include="Database.cs" />
     <Compile Include="Doorbell.cs" />
+    <Compile Include="DoorbellDataGridRow.cs" />
     <Compile Include="DoorbellsControl.xaml.cs">
       <DependentUpon>DoorbellsControl.xaml</DependentUpon>
     </Compile>

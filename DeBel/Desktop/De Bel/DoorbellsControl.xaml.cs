@@ -30,7 +30,9 @@ namespace De_Bel
             var dialog = new AddBuildingDialogWindow();
             dialog.ShowDialog();
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
-                MessageBox.Show("Oké");
+            {
+
+            }
             else
                 MessageBox.Show("Cancel");
         }
@@ -40,7 +42,10 @@ namespace De_Bel
             var dialog = new AddDoorbellDialog();
             dialog.ShowDialog();
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
-                MessageBox.Show("Oké");
+            {
+                var doorbell = new Doorbell(-1, dialog.DoorbellName, ((Building)cbboxBuildings.SelectedItem).Id);
+                
+            }
             else
                 MessageBox.Show("Cancel");
         }

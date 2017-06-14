@@ -19,6 +19,11 @@ namespace De_Bel
     /// </summary>
     public partial class AddDoorbellDialog : Window
     {
+        public string DoorbellName
+        {
+            get { return tboxName.Text; }
+        }
+
         public AddDoorbellDialog()
         {
             InitializeComponent();

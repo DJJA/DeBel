@@ -19,6 +19,21 @@ namespace De_Bel
     /// </summary>
     public partial class AddBuildingDialogWindow : Window
     {
+        public string Street
+        {
+            get { return tboxStreet.Text; }
+        }
+
+        public string HouseNumber
+        {
+            get { return tboxHouseNumber.Text; }
+        }
+
+        public string Zipcode
+        {
+            get { return tboxZipcode.Text; }
+        }
+
         public AddBuildingDialogWindow()
         {
             InitializeComponent();

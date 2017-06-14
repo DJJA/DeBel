@@ -10,11 +10,11 @@
         <TextBox Height="23" Margin="10,31,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Naam:" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,73,0,0" TextWrapping="Wrap" Text="Adres:" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="77,94,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBox x:Name="tboxStreet" Height="23" Margin="77,94,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,95,0,0" TextWrapping="Wrap" Text="Straatnaam:" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="77,122,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBox x:Name="tboxHouseNumber"  Height="23" Margin="77,122,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,123,0,0" TextWrapping="Wrap" Text="Nummer:" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="77,150,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBox x:Name="tboxZipcode" Height="23" Margin="77,150,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,151,0,0" TextWrapping="Wrap" Text="Postcode:" VerticalAlignment="Top"/>
         <Button x:Name="btnSave" Content="Save" IsDefault="True" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Click="btnSave_Click"/>
         <Button Content="Cancel" IsCancel="True" Margin="0,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>

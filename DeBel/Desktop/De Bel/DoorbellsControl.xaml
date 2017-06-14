@@ -10,7 +10,8 @@
         <ComboBox x:Name="cbboxBuildings" HorizontalAlignment="Left" Margin="61,10,0,0" VerticalAlignment="Top" Width="263" SelectionChanged="cbboxBuildings_SelectionChanged"/>
         <DataGrid x:Name="dgGrid" Margin="10,38,10,35" AutoGenerateColumns="True">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Header=""></DataGridCheckBoxColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding }"/>
+                
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Button" HorizontalAlignment="Left" Margin="404,12,0,0" VerticalAlignment="Top" Width="75"/>
