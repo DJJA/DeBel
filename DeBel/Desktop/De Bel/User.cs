@@ -139,7 +139,7 @@ namespace De_Bel
                         int houseNumber = Convert.ToInt32(dt.Rows[i]["HouseNumber"]);
                         list.Add(new Building(id, companyID, street, zipcode, houseNumber));
                     }
-                    catch (Exception ex) { }
+                    catch (Exception) { }
                 }
             }
             return list;

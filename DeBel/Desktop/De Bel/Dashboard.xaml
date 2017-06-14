@@ -25,7 +25,7 @@
             </TabItem>
             <TabItem Header="Errors">
                 <Grid Background="#FFE5E5E5">
-                    <local:ErrorControl x:Name="tabErrorControl" Margin="10,10,10,65.4"/>
+                    <local:ErrorControl x:Name="tabErrorControl" Margin="68,38,68,49.4"/>
                 </Grid>
             </TabItem>
         </TabControl>

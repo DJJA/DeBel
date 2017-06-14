@@ -70,7 +70,7 @@ namespace De_Bel
                         bool adminStatus = Convert.ToBoolean(dt.Rows[i]["AdminStatus"]);
                         users.Add(new User(id, name, email, username, password, phoneNumber, adminStatus));
                     }
-                    catch (Exception ex) { }
+                    catch (Exception) { }
                 }
             }
             return users;
