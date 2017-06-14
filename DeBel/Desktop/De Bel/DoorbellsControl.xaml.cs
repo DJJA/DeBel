@@ -24,5 +24,41 @@ namespace De_Bel
         {
             InitializeComponent();
         }
+
+        private void btnAddBuilding_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new AddBuildingDialogWindow();
+            dialog.ShowDialog();
+            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+                MessageBox.Show("Oké");
+            else
+                MessageBox.Show("Cancel");
+        }
+
+        private void btnAddDoorbell_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new AddDoorbellDialog();
+            dialog.ShowDialog();
+            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+                MessageBox.Show("Oké");
+            else
+                MessageBox.Show("Cancel");
+        }
+
+        public void LoadBuildingsInCombobox()
+        {
+            cbboxBuildings.ItemsSource = Dashboard.User.GetBuildings();
+            if (cbboxBuildings.Items.Count > 0)
+                cbboxBuildings.SelectedIndex = 0;
+        }
+
+        private void cbboxBuildings_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(e.AddedItems.Count > 0)
+            {
+                var building = (Building)e.AddedItems[0];
+                dgGrid.ItemsSource = building.Doorbells;
+            }
+        }
     }
 }

@@ -17,7 +17,16 @@ namespace De_Bel
         public string Street { get; set; }
         public string Zipcode { get; set; }
         public int HouseNumber { get; set; }
-        public List<Doorbell> Doorbells { get; set; }
+        private List<Doorbell> _doorbells = null;
+        public List<Doorbell> Doorbells
+        {
+            get
+            {
+                if (_doorbells == null)
+                    _doorbells = GetDoorbells();
+                return _doorbells;
+            }
+        }
 
         public Building(int id, int companyId, string street, string zipcode, int housenumber)
         {
@@ -74,6 +83,37 @@ namespace De_Bel
                 }
             }
             return users;
+        }
+
+        private List<Doorbell> GetDoorbells()
+        {
+            var list = new List<Doorbell>();
+            string query = "SELECT * FROM DoorBell d, DoorBell_perosn dp WHERE d.ID = dp.DoorBell_ID AND d.Building_ID = @Building_ID";
+
+            using (var connection = new MySqlConnection(connectionString))
+            using (var adapter = new MySqlDataAdapter(query, connection))
+            {
+                connection.Open();
+
+                adapter.SelectCommand.Parameters.AddWithValue("@Building_ID", Id);
+
+
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    try
+                    {
+                        int id = Convert.ToInt32(dt.Rows[i]["doorbell_ID"]);
+                        int buildingID = Convert.ToInt32(dt.Rows[i]["Building_ID"]);
+                        string name = (string)dt.Rows[i]["doorbellName"];
+                        list.Add(new Doorbell(id, name, buildingID));
+                    }
+                    catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                }
+            }
+            return list;
         }
 
         public List<Doorbell> GetDoorbells(User usr)
