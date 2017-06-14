@@ -24,5 +24,25 @@ namespace De_Bel
         {
             InitializeComponent();
         }
+
+        private void btnAddBuilding_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new AddBuildingDialogWindow();
+            dialog.ShowDialog();
+            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+                MessageBox.Show("Oké");
+            else
+                MessageBox.Show("Cancel");
+        }
+
+        private void btnAddDoorbell_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new AddDoorbellDialog();
+            dialog.ShowDialog();
+            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+                MessageBox.Show("Oké");
+            else
+                MessageBox.Show("Cancel");
+        }
     }
 }
