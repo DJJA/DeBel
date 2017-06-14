@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace De_Bel
     /// </summary>
     public partial class LoginWindow : Window
     {
+        private static readonly string passwordPath = "";
         public LoginWindow()
         {
             InitializeComponent();
@@ -78,6 +80,25 @@ namespace De_Bel
                 this.Close();
             }
             else MessageBox.Show("Username and Password don't match");
+        }
+
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LoadUsernameAndPassword()
+        {
+            try
+            {
+                using(var sr = new StreamReader())
+            }
+            catch (Exception) { }
+        }
+
+        private void SaveUsernameAndPassword()
+        {
+
         }
     }
 }

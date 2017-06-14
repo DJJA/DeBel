@@ -9,14 +9,18 @@ namespace De_Bel
     public class Log
     {
         public int DoorbellId { get; set; }
+        //public Doorbell Doorbell { get; set; }
         public int UserId { get; set; }
         public LogType Type { get; set; }
         public DateTime DateTime { get; set; }
         public string PicturePath { get; set; }
         public string ErrorMessage { get; set; }
 
+        public bool ErrorWindow { get; set; }
+
         public Log(int doorbellId, int userId, DateTime dateTime, string picturePath, string errorMessage)
         {
+            ErrorWindow = false;
             DoorbellId = doorbellId;
             UserId = userId;
 
@@ -37,11 +41,20 @@ namespace De_Bel
             if(Type == LogType.None)
                 return "--==   " + DateTime.ToString("dd-MM-yyyy") + "   ==--";
             string logType;
-            if (Type == LogType.Error)
-                logType = "Error";
+            if(!ErrorWindow)
+            {
+                if (Type == LogType.Error)
+                    logType = "Error";
+                else
+                    logType = "Doorbell Ringed";
+                return DateTime.ToString("HH:mm:ss") + " - " + logType;
+
+            }
             else
-                logType = "Doorbell Ringed";
-            return DateTime.ToString("HH:mm:ss") + " - " + logType;
+                {
+                return DateTime.ToString("HH:mm:ss") + " - " 
+                    + Environment.NewLine + " wat info";
+            }
         }
 
         public static List<Log> AddDataLabelsToMatchesList(List<Log> LogEntries)
