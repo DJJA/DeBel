@@ -55,7 +55,7 @@ namespace De_Bel
                         string errorMessage = (string)dt.Rows[i]["Error"];
                         list.Add(new Log(doorbellId, userId, dateTime, picturePath, errorMessage));
                     }
-                    catch (Exception ex) { }
+                    catch (Exception) { }
                 }
             }
             return list;

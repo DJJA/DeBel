@@ -23,6 +23,7 @@ namespace De_Bel
         public ErrorControl()
         {
             InitializeComponent();
+
         }
     }
 }
