@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:De_Bel"
         mc:Ignorable="d"
-        Title="De Bel - Log In" Height="300" Width="500">
+        Title="De Bel - Log In" Height="300" Width="500" ContentRendered="Window_ContentRendered">
     <Grid>
         <TextBox x:Name="tboxUsername" HorizontalAlignment="Left" Height="23" Margin="126,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" KeyDown="tboxUsername_KeyDown"/>
         <PasswordBox x:Name="tboxPassword" HorizontalAlignment="Left" Height="23" Margin="126,125,0,0" VerticalAlignment="Top" Width="250" KeyDown="tboxPassword_KeyDown"/>
