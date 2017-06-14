@@ -44,5 +44,21 @@ namespace De_Bel
             else
                 MessageBox.Show("Cancel");
         }
+
+        public void LoadBuildingsInCombobox()
+        {
+            cbboxBuildings.ItemsSource = Dashboard.User.GetBuildings();
+            if (cbboxBuildings.Items.Count > 0)
+                cbboxBuildings.SelectedIndex = 0;
+        }
+
+        private void cbboxBuildings_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(e.AddedItems.Count > 0)
+            {
+                var building = (Building)e.AddedItems[0];
+                dgGrid.ItemsSource = building.Doorbells;
+            }
+        }
     }
 }

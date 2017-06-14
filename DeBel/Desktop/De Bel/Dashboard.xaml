@@ -15,7 +15,7 @@
             </TabItem>
             <TabItem Header="Doorbells">
                 <Grid Background="#FFE5E5E5">
-                    <local:DoorbellsControl/>
+                    <local:DoorbellsControl x:Name="tabDoorbellControl"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Users">

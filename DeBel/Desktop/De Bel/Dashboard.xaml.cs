@@ -30,6 +30,9 @@ namespace De_Bel
             tabLogControl.cboxBuilding.ItemsSource = Dashboard.User.GetBuildings();
             if (tabLogControl.cboxBuilding.Items.Count > 0)
                 tabLogControl.cboxBuilding.SelectedIndex = 0;
+
+            tabDoorbellControl.LoadBuildingsInCombobox();
+
         }
     }
 }
