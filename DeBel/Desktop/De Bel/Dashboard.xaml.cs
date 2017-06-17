@@ -20,7 +20,7 @@ namespace De_Bel
     public partial class Dashboard : Window
     {
         public static User User { get; set; }
-        public static Doorbell doorbell { get;set; }
+        public static Doorbell doorbell { get; set; }
         public Dashboard()
         {
             InitializeComponent();
@@ -28,12 +28,20 @@ namespace De_Bel
 
         private void Window_ContentRendered(object sender, EventArgs e)
         {
+            //InitLogControl();
+            InitDoorbellsControll();
+        }
+
+        private void InitLogControl()
+        {
             tabLogControl.cboxBuilding.ItemsSource = Dashboard.User.GetBuildings();
             if (tabLogControl.cboxBuilding.Items.Count > 0)
                 tabLogControl.cboxBuilding.SelectedIndex = 0;
+        }
 
+        private void InitDoorbellsControll()
+        {
             tabDoorbellControl.LoadBuildingsInCombobox();
-
         }
     }
 }

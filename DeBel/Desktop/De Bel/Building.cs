@@ -36,6 +36,11 @@ namespace De_Bel
             HouseNumber = housenumber;
         }
 
+        public void RefreshDoorbells()
+        {
+            _doorbells = GetDoorbells();
+        }
+
         public bool AddBuilding()
         {
             bool success = true;
@@ -76,7 +81,7 @@ namespace De_Bel
         public List<User> GetUsers()
         {
             var users = new List<User>();
-            string query = "SELECT * FROM Person p, Buidling_Person bp WHERE p.ID = bp.Person_ID AND bp.Building_ID = @Building_ID";
+            string query = "SELECT * FROM Person p, Building_Person bp WHERE p.ID = bp.Person_ID AND bp.Building_ID = @Building_ID";
 
             using (var connection = new MySqlConnection(connectionString))
             using (var adapter = new MySqlDataAdapter(query, connection))
@@ -110,7 +115,7 @@ namespace De_Bel
         private List<Doorbell> GetDoorbells()
         {
             var list = new List<Doorbell>();
-            string query = "SELECT * FROM DoorBell d, DoorBell_perosn dp WHERE d.ID = dp.DoorBell_ID AND d.Building_ID = @Building_ID";
+            string query = "SELECT * FROM DoorBell WHERE Building_ID = @Building_ID";
 
             using (var connection = new MySqlConnection(connectionString))
             using (var adapter = new MySqlDataAdapter(query, connection))
@@ -127,7 +132,7 @@ namespace De_Bel
                 {
                     try
                     {
-                        int id = Convert.ToInt32(dt.Rows[i]["doorbell_ID"]);
+                        int id = Convert.ToInt32(dt.Rows[i]["ID"]);
                         int buildingID = Convert.ToInt32(dt.Rows[i]["Building_ID"]);
                         string name = (string)dt.Rows[i]["doorbellName"];
                         list.Add(new Doorbell(id, name, buildingID));
@@ -141,7 +146,7 @@ namespace De_Bel
         public List<Doorbell> GetDoorbells(User usr)
         {
             var list = new List<Doorbell>();
-            string query = "SELECT * FROM DoorBell d, DoorBell_perosn dp WHERE d.ID = dp.DoorBell_ID AND d.Building_ID = @Building_ID AND dp.Person_ID = @Person_ID";
+            string query = "SELECT * FROM DoorBell d, DoorBell_person dp WHERE d.ID = dp.DoorBell_ID AND d.Building_ID = @Building_ID AND dp.Person_ID = @Person_ID";
 
             using (var connection = new MySqlConnection(connectionString))
             using (var adapter = new MySqlDataAdapter(query, connection))
@@ -173,6 +178,40 @@ namespace De_Bel
         public override string ToString()
         {
             return Street + " " + HouseNumber;
+        }
+
+        public static List<Building> GetBuildings()                    // This is in the wrong place
+        {
+            var list = new List<Building>();
+            //string query = "SELECT * FROM Building b, Buidling_Person bp WHERE b.ID = bp.Building_ID AND bp.Person_ID = @Person_ID;";
+            string query = "SELECT * FROM Building ORDER BY Street ASC;";
+
+            using (var connection = new MySqlConnection(connectionString))
+            using (var adapter = new MySqlDataAdapter(query, connection))
+            {
+                connection.Open();
+
+                //adapter.SelectCommand.Parameters.AddWithValue("@Person_ID", Id);
+
+                var dt = new DataTable();
+                adapter.Fill(dt);
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    try
+                    {
+                        int id = Convert.ToInt32(dt.Rows[i]["ID"]);
+                        //int companyID = Convert.ToInt32(dt.Rows[i]["Company_ID"]);
+                        string street = (string)dt.Rows[i]["Street"];
+                        string zipcode = (string)dt.Rows[i]["Zipcode"];
+                        int houseNumber = Convert.ToInt32(dt.Rows[i]["HouseNumber"]);
+                        //var houseNumber = (string)dt.Rows[i]["HouseNumber"];
+                        list.Add(new Building(id, -1, street, zipcode, houseNumber));
+                    }
+                    catch (Exception) { }
+                }
+            }
+            return list;
         }
     }
 }

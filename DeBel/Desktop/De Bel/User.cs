@@ -18,9 +18,48 @@ namespace De_Bel
         public string Password { get; set; }
         public int PhoneNumber { get; set; }
         public bool AdminStatus { get; set; }
-        public List<Doorbell> Doorbells { get; set; }
+        private List<Doorbell> _doorbells = null;
+        public List<Doorbell> Doorbells
+        {
+            get
+            {
+                if (_doorbells == null)
+                    _doorbells = GetDoorbells();
+                return _doorbells;
+            }
+        }
 
-        
+        private List<Doorbell> GetDoorbells()
+        {
+            var list = new List<Doorbell>();
+            string query = "SELECT * FROM DoorBell d, Doorbell_Person dp WHERE d.ID = dp.DoorBell_ID AND dp.Person_ID = @Person_ID";
+
+            using (var connection = new MySqlConnection(connectionString))
+            using (var adapter = new MySqlDataAdapter(query, connection))
+            {
+                connection.Open();
+
+                adapter.SelectCommand.Parameters.AddWithValue("@Person_ID", Id);
+
+
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    try
+                    {
+                        int id = Convert.ToInt32(dt.Rows[i]["DoorBell_ID"]);
+                        int buildingID = Convert.ToInt32(dt.Rows[i]["Building_ID"]);
+                        string name = (string)dt.Rows[i]["doorbellName"];
+                        list.Add(new Doorbell(id, name, buildingID));
+                    }
+                    catch (Exception) { }
+                }
+            }
+            return list;
+        }
+
         MySqlCommandBuilder builder;
 
         private static MySqlConnection connection = new MySqlConnection
@@ -144,8 +183,8 @@ namespace De_Bel
         public List<Building> GetBuildings()
         {
             var list = new List<Building>();
-            //string query = "SELECT * FROM Building b, Buidling_Person bp WHERE b.ID = bp.Building_ID AND bp.Person_ID = @Person_ID;";
-            string query = "SELECT * FROM Building;";
+            string query = "SELECT * FROM Building b, Buidling_Person bp WHERE b.ID = bp.Building_ID AND bp.Person_ID = @Person_ID ORDER BY Street ASC;";
+            //string query = "SELECT * FROM Building ORDER BY Street ASC;";
 
             using (var connection = new MySqlConnection(connectionString))
             using (var adapter = new MySqlDataAdapter(query, connection))

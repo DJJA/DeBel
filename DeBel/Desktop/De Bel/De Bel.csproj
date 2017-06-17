@@ -71,6 +71,9 @@
     <Compile Include="Database.cs" />
     <Compile Include="Doorbell.cs" />
     <Compile Include="DoorbellDataGridRow.cs" />
+    <Compile Include="DoorbellManagerDialog.xaml.cs">
+      <DependentUpon>DoorbellManagerDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DoorbellsControl.xaml.cs">
       <DependentUpon>DoorbellsControl.xaml</DependentUpon>
     </Compile>
@@ -83,6 +86,7 @@
       <DependentUpon>LogControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
+    <Compile Include="UserDoorbellPermission.cs" />
     <Compile Include="UsersControl.xaml.cs">
       <DependentUpon>UsersControl.xaml</DependentUpon>
     </Compile>
@@ -99,6 +103,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DoorbellManagerDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

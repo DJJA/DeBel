@@ -30,6 +30,19 @@ namespace De_Bel
             return false;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != this.GetType()) return false;
+            var db = (Doorbell)obj;
+            if (db.Id != Id) return false;
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id;
+        }
+
         public bool AddDoorbell()
         {
             bool success = true;
