@@ -21,6 +21,10 @@ namespace De_Bel
     /// </summary>
     public partial class DoorbellsControl : UserControl
     {
+        public delegate void mouseup_delegate(object obj, MouseButtonEventArgs args);
+
+        private bool userMadeChanges = false;
+
         public DoorbellsControl()
         {
             InitializeComponent();
@@ -82,6 +86,12 @@ namespace De_Bel
 
         public void LoadBuildingsInCombobox()
         {
+            RefreshBuildings();
+        }
+
+        private void RefreshBuildings()
+        {
+            cbboxBuildings.ItemsSource = null;
             cbboxBuildings.ItemsSource = Building.GetBuildings();
             if (cbboxBuildings.Items.Count > 0)
                 cbboxBuildings.SelectedIndex = 0;
@@ -122,6 +132,12 @@ namespace De_Bel
                     var col = new DataGridCheckBoxColumn();
                     col.Header = building.Doorbells[i].Name;
                     col.Binding = new Binding("Permissions[" + i + "]");
+
+                    var style = new Style();
+                    style.Setters.Add(new EventSetter(CheckBox.CheckedEvent, new RoutedEventHandler(CheckBox_CheckedChanged)));
+                    style.Setters.Add(new EventSetter(CheckBox.UncheckedEvent, new RoutedEventHandler(CheckBox_CheckedChanged)));
+                    col.CellStyle = style;
+
                     dgGrid.Columns.Add(col);
                 }
 
@@ -136,6 +152,84 @@ namespace De_Bel
 
                 // Add data to the datagrid
                 dgGrid.ItemsSource = items;
+            }
+        }
+
+        private void CheckBox_CheckedChanged(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show("Checked changed");
+            if (!userMadeChanges)
+                userMadeChanges = true;
+        }
+
+        private void btnRemoveDoorbell_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbboxBuildings.SelectedIndex >= 0)
+            {
+                var building = cbboxBuildings.SelectedItem as Building;
+                var dialog = new RemoveDoorbellDialog(building);
+                dialog.ShowDialog();
+                if (dialog.MadeChanges)
+                {
+                    RefreshDataGrid();
+                }
+            }
+        }
+
+        private void btnRemoveBuilding_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbboxBuildings.SelectedIndex >= 0)
+            {
+                var building = cbboxBuildings.SelectedItem as Building;
+                if (building.Doorbells.Count > 0)
+                {
+                    MessageBox.Show("Error: Cannot remove a building with doorbells attached to it. In order to remove the building, please remove the doorbells first.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    if (MessageBox.Show("Are you sure you want to remove the building located at '" + building.Street + " " + building.HouseNumber + "'?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        if (building.RemoveBuilding())
+                        {
+                            RefreshBuildings();
+                        }
+                        else MessageBox.Show("Error: Could not remove the building. Please try again later.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbboxBuildings.SelectedIndex >= 0)
+            {
+                var success = true;
+                var building = (Building)cbboxBuildings.SelectedItem;
+                var doorbells = building.Doorbells;
+                var permissions = (List<UserDoorbellPermission>)dgGrid.ItemsSource;
+
+                for (int i = 0; i < doorbells.Count; i++)
+                {
+                    // Get users that have acces
+                    var usersThatAccess = new List<User>();
+                    foreach (var item in permissions)
+                    {
+                        if (item.Permissions[i])
+                            usersThatAccess.Add(item.User);
+                    }
+
+                    // Remove the users that don't have access
+                    if (!doorbells[i].RemoveUsersThatDontHaveAccess(usersThatAccess))
+                        success = false;
+
+                    // Add the users that do have access if they're not already there
+                    if (!doorbells[i].AddUserAccess(usersThatAccess))
+                        success = false;
+                }
+
+                if (success)
+                    MessageBox.Show("Changes successfully saved.");
+                else MessageBox.Show("There were problems saving the changes. Please try again later.");
             }
         }
     }

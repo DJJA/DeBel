@@ -68,6 +68,136 @@ namespace De_Bel
             return success;
         }
 
+        public bool RemoveDoorbell()
+        {
+            bool success = true;
+            try
+            {
+                string query = "DELETE FROM Doorbell WHERE ID = @Doorbell_ID";
+
+                using (var connection = new MySqlConnection(connectionString))
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@Doorbell_ID", Id);
+
+                    command.ExecuteNonQuery();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                success = false;
+            }
+            return success;
+        }
+
+        public bool RemoveUsersThatDontHaveAccess(List<User> usersThatHaveAccess)
+        {
+            bool success = true;
+            try
+            {
+                string query = "DELETE FROM Doorbell_Person WHERE Doorbell_ID = @Doorbell_ID AND Person_ID NOT IN(";
+                for (int i = 0; i < usersThatHaveAccess.Count; i++)
+                {
+                    query += "@Person_ID" + i + ",";
+                }
+                query = query.Substring(0, query.Length - 1);   // Remove last comma
+                query += ");";
+
+                using (var connection = new MySqlConnection(connectionString))
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    connection.Open();
+
+                    command.Parameters.AddWithValue("@Doorbell_ID", Id);
+                    for (int i = 0; i < usersThatHaveAccess.Count; i++)
+                    {
+                        command.Parameters.AddWithValue("@Person_ID" + i, usersThatHaveAccess[i].Id);
+                    }
+                    
+                    command.ExecuteNonQuery();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                success = false;
+            }
+            return success;
+        }
+
+        private List<User> GetUsersThatHaveAccess()
+        {
+            var list = new List<User>();
+            try
+            {
+                string query = "SELECT Person_ID FROM Doorbell_Person WHERE Doorbell_ID = @Doorbell_ID";
+
+                using (var connection = new MySqlConnection(connectionString))
+                using (var adapter = new MySqlDataAdapter(query, connection))
+                {
+                    connection.Open();
+
+                    adapter.SelectCommand.Parameters.AddWithValue("@DoorBell_ID", Id);
+
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        try
+                        {
+                            int doorbellId = Convert.ToInt32(dt.Rows[i]["DoorBell_ID"]);
+                            list.Add(new User(doorbellId));
+                        }
+                        catch (Exception) { }
+                    }
+                }
+            }
+            catch (Exception) { }
+            return list;
+        }
+
+        public bool AddUserAccess(List<User> users)
+        {
+            bool success = true;
+            var usersWithAccessInDB = GetUsersThatHaveAccess();
+            foreach (var item in users)
+            {
+                if (!usersWithAccessInDB.Contains(item))
+                    if (!AddUserAccess(item))
+                        success = false;
+            }
+            return success;
+        }
+
+        private bool AddUserAccess(User user)
+        {
+            bool success = true;
+            try
+            {
+                string query = "INSERT INTO Doorbell_Person (Doorbell_ID, Person_ID) VALUES(@Doorbell_ID, @Person_ID)";
+
+                using (var connection = new MySqlConnection(connectionString))
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    connection.Open();
+
+                    command.Parameters.AddWithValue("@Doorbell_ID", Id);
+                    command.Parameters.AddWithValue("@Person_ID", user.Id);
+
+                    command.ExecuteNonQuery();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                success = false;
+            }
+            return success;
+        }
+
         public List<Log> GetErrors()
         {
             var list = new List<Log>();

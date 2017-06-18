@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -73,9 +74,28 @@ namespace De_Bel
             return false;
         }
 
-        public static bool RemoveBuilding(Building b)
+        public bool RemoveBuilding()
         {
-            return false;
+            bool success = true;
+            try
+            {
+                string query = "DELETE FROM Building WHERE ID = @Building_ID";
+
+                using (var connection = new MySqlConnection(connectionString))
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@Building_ID", Id);
+
+                    command.ExecuteNonQuery();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                success = false;
+            }
+            return success;
         }
 
         public List<User> GetUsers()

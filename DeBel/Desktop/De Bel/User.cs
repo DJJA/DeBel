@@ -76,6 +76,11 @@ namespace De_Bel
             this.AdminStatus = adminstatus;
         }
 
+        public User(int id)
+        {
+            this.Id = id;
+        }
+
         public static User LogInCheck(string username, string password)
         {
             string query = "SELECT * FROM Person WHERE Username = '" + username + "' AND PersonPassword = '" + password + "'";
@@ -212,6 +217,19 @@ namespace De_Bel
                 }
             }
             return list;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != this.GetType()) return false;
+            var db = (User)obj;
+            if (db.Id != Id) return false;
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id;
         }
     }
 }
