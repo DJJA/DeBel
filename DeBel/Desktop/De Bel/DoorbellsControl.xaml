@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="De_Bel.DoorbellsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:De_Bel"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="DataGridColumnSeparatorStyle" TargetType="DataGridCell">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Fill="Gray"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <ComboBox x:Name="cbboxBuildings" HorizontalAlignment="Left" Margin="61,10,0,0" VerticalAlignment="Top" Width="263" SelectionChanged="cbboxBuildings_SelectionChanged"/>
+        <DataGrid x:Name="dgGrid" Margin="10,38,10,35" AutoGenerateColumns="False">
+            <!--<DataGrid.Columns>
+                --><!--<DataGridTextColumn Header="Name" Binding="{Binding }"/>
+                <DataGridCheckBoxColumn />--><!--
+            </DataGrid.Columns>-->
+        </DataGrid>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Building:" VerticalAlignment="Top"/>
+        <Button x:Name="btnAddBuilding" Content="Add Building" HorizontalAlignment="Left" Margin="10,0,0,10" Width="100" Height="20" VerticalAlignment="Bottom" Click="btnAddBuilding_Click"/>
+        <Button x:Name="btnRemoveBuilding" Content="Remove Building" HorizontalAlignment="Left" Margin="115,0,0,10" VerticalAlignment="Bottom" Width="100" Click="btnRemoveBuilding_Click"/>
+        <Button x:Name="btnAddDoorbell" Content="Add Doorbell" HorizontalAlignment="Left" Margin="220,0,0,10" VerticalAlignment="Bottom" Width="100" Click="btnAddDoorbell_Click"/>
+        <Button x:Name="btnRemoveDoorbell" Content="Remove Doorbell" HorizontalAlignment="Left" Margin="325,0,0,10" VerticalAlignment="Bottom" Width="100" Click="btnRemoveDoorbell_Click"/>
+        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="100" Margin="0,0,10,10" Click="btnSave_Click"/>
+    </Grid>
+</UserControl>
