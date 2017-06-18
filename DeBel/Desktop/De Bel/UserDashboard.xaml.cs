@@ -15,30 +15,14 @@ using System.Windows.Shapes;
 namespace De_Bel
 {
     /// <summary>
-    /// Interaction logic for Dashboard.xaml
+    /// Interaction logic for UserDashboard.xaml
     /// </summary>
-    public partial class Dashboard : Window
+    public partial class UserDashboard : Window
     {
-        public Dashboard()
+        public UserDashboard()
         {
             InitializeComponent();
             this.Title = "Dashboard (" + User.CurrentUser.Name + ")";
-        }
-
-        private void Window_ContentRendered(object sender, EventArgs e)
-        {
-            //InitLogControl();
-            InitDoorbellsControll();
-        }
-
-        private void InitLogControl()
-        {
-            tabLogControl.Refresh();
-        }
-
-        private void InitDoorbellsControll()
-        {
-            tabDoorbellControl.LoadBuildingsInCombobox();
         }
     }
 }

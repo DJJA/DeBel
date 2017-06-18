@@ -11,6 +11,8 @@ namespace De_Bel
 {
     public class User : Database
     {
+        public static User CurrentUser { get; set; }    // Holds the user that's currently logged in
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
@@ -63,7 +65,7 @@ namespace De_Bel
         MySqlCommandBuilder builder;
 
         private static MySqlConnection connection = new MySqlConnection
-        (@"Server=studmysql01.fhict.local;Uid=dbi338083;Database=dbi338083;Pwd=bossmonster;");
+        (connectionString);
 
         public User(int id, string name, string email, string username, string password, int phonenumber, bool adminstatus)
         {

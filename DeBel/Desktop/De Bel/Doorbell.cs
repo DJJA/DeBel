@@ -157,8 +157,8 @@ namespace De_Bel
                     {
                         try
                         {
-                            int doorbellId = Convert.ToInt32(dt.Rows[i]["DoorBell_ID"]);
-                            list.Add(new User(doorbellId));
+                            int userId = Convert.ToInt32(dt.Rows[i]["Person_ID"]);
+                            list.Add(new User(userId));
                         }
                         catch (Exception) { }
                     }

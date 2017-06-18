@@ -97,12 +97,20 @@ namespace De_Bel
                     SaveUsername();
                 if (chkbxPassword.IsChecked == true)
                     SavePassword();
-                User LoginCheck = User.LogInCheck(tboxUsername.Text, tboxPassword.Password);
-                if (LoginCheck != null)
+                var user = User.LogInCheck(tboxUsername.Text, tboxPassword.Password);
+                if (user != null)
                 {
-                    Dashboard dashboard = new Dashboard();
-                    Dashboard.User = LoginCheck;
-                    dashboard.Show();
+                    User.CurrentUser = user;
+                    if(user.AdminStatus)
+                    {
+                        var dashboard = new Dashboard();
+                        dashboard.Show();
+                    }
+                    else
+                    {
+                        var dashboard = new UserDashboard();
+                        dashboard.Show();
+                    }
                     this.Close();
                 }
                 else MessageBox.Show("Username and Password don't match");

@@ -36,7 +36,7 @@ namespace De_Bel
         public void Refresh()
         {
             cboxBuilding.ItemsSource = null;
-            cboxBuilding.ItemsSource = Dashboard.User.GetBuildings();
+            cboxBuilding.ItemsSource = User.CurrentUser.GetBuildings();
             if (cboxBuilding.Items.Count > 0)
                 cboxBuilding.SelectedIndex = 0;
         }
@@ -47,7 +47,7 @@ namespace De_Bel
             if (e.AddedItems.Count > 0)
             {
                 var building = (Building)e.AddedItems[0];
-                cboxDoorbell.ItemsSource = building.GetDoorbells(Dashboard.User);
+                cboxDoorbell.ItemsSource = building.GetDoorbells(User.CurrentUser);
                 if (cboxDoorbell.Items.Count > 0)
                     cboxDoorbell.SelectedIndex = 0;
             }
