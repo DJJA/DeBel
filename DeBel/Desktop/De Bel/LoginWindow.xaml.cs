@@ -31,6 +31,12 @@ namespace De_Bel
             TboxUsername_LostFocus(null, null);
             chkbxUsername.Unchecked += ChkbxUsername_Unchecked;
             chkbxPassword.Unchecked += ChkbxPassword_Unchecked;
+            tboxPassword.GotFocus += TboxPassword_GotFocus;
+        }
+
+        private void TboxPassword_GotFocus(object sender, RoutedEventArgs e)
+        {
+            tboxPassword.Clear();
         }
 
         private void ChkbxPassword_Unchecked(object sender, RoutedEventArgs e)
@@ -52,10 +58,6 @@ namespace De_Bel
             {
                 tboxUsername.Foreground = Brushes.LightGray;
                 tboxUsername.Text = "Enter username...";
-            }
-            else
-            {
-                //SaveUsername();
             }
         }
 
@@ -175,11 +177,6 @@ namespace De_Bel
                 }
             }
             catch (Exception) { }
-        }
-
-        private void tboxPassword_LostFocus(object sender, RoutedEventArgs e)
-        {
-            //SavePassword();
         }
     }
 }

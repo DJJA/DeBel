@@ -8,7 +8,7 @@
         Title="De Bel - Log In" Height="300" Width="500" ContentRendered="Window_ContentRendered">
     <Grid>
         <TextBox x:Name="tboxUsername" HorizontalAlignment="Left" Height="23" Margin="126,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" KeyDown="tboxUsername_KeyDown"/>
-        <PasswordBox x:Name="tboxPassword" HorizontalAlignment="Left" Height="23" Margin="126,125,0,0" VerticalAlignment="Top" Width="250" KeyDown="tboxPassword_KeyDown" LostFocus="tboxPassword_LostFocus"/>
+        <PasswordBox x:Name="tboxPassword" HorizontalAlignment="Left" Height="23" Margin="126,125,0,0" VerticalAlignment="Top" Width="250" KeyDown="tboxPassword_KeyDown"/>
         <Button x:Name="btnLogin" Content="Log In" HorizontalAlignment="Left" Margin="195,153,0,0" VerticalAlignment="Top" Width="75" Click="btnLogin_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="65,97,0,0" TextWrapping="Wrap" Text="Username:" VerticalAlignment="Top" Height="17"/>
         <TextBlock HorizontalAlignment="Left" Margin="69,126,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top" Height="17"/>

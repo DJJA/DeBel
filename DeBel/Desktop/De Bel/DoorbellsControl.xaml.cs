@@ -119,6 +119,7 @@ namespace De_Bel
                 colName.Header = "Name";
                 //colName.CellStyle = (Style)FindResource("DataGridColumnSeparatorStyle");
                 colName.Binding = new Binding("User.Name");
+                colName.MinWidth = 100;
                 dgGrid.Columns.Add(colName);
 
                 var colSeperator = new DataGridTemplateColumn();

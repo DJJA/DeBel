@@ -28,11 +28,6 @@ namespace De_Bel
 
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            Refresh();
-        }
-
         public void Refresh()
         {
             cboxBuilding.ItemsSource = null;

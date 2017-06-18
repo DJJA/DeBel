@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:De_Bel"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="600" Loaded="UserControl_Loaded">
+             d:DesignHeight="400" d:DesignWidth="600">
     <Grid>
         <ListBox x:Name="lbLog" HorizontalAlignment="Left" Margin="10,73,0,10" Width="210" SelectionChanged="lbLog_SelectionChanged"/>
         <Image x:Name="imgPhoto" Margin="225,10,10,51"/>

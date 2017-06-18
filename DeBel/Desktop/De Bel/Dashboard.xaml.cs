@@ -23,22 +23,30 @@ namespace De_Bel
         {
             InitializeComponent();
             this.Title = "Dashboard (" + User.CurrentUser.Name + ")";
+            lblLoggedInAs.Content = "Logged in as: " + User.CurrentUser.Name;
         }
 
         private void Window_ContentRendered(object sender, EventArgs e)
         {
-            //InitLogControl();
-            InitDoorbellsControll();
-        }
-
-        private void InitLogControl()
-        {
             tabLogControl.Refresh();
+            InitDoorbellsControll();
         }
 
         private void InitDoorbellsControll()
         {
             tabDoorbellControl.LoadBuildingsInCombobox();
+        }
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            var loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
+        }
+
+        private void tabLog_Clicked(object sender, MouseButtonEventArgs e)
+        {
+            tabLogControl.Refresh();
         }
     }
 }

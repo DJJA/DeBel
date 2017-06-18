@@ -135,7 +135,7 @@ namespace De_Bel
         private List<Doorbell> GetDoorbells()
         {
             var list = new List<Doorbell>();
-            string query = "SELECT * FROM DoorBell WHERE Building_ID = @Building_ID";
+            string query = "SELECT * FROM DoorBell WHERE Building_ID = @Building_ID ORDER BY DoorbellName ASC";
 
             using (var connection = new MySqlConnection(connectionString))
             using (var adapter = new MySqlDataAdapter(query, connection))
@@ -166,7 +166,7 @@ namespace De_Bel
         public List<Doorbell> GetDoorbells(User usr)
         {
             var list = new List<Doorbell>();
-            string query = "SELECT * FROM DoorBell d, DoorBell_person dp WHERE d.ID = dp.DoorBell_ID AND d.Building_ID = @Building_ID AND dp.Person_ID = @Person_ID";
+            string query = "SELECT * FROM DoorBell d, DoorBell_person dp WHERE d.ID = dp.DoorBell_ID AND d.Building_ID = @Building_ID AND dp.Person_ID = @Person_ID ORDER BY DoorbellName ASC";
 
             using (var connection = new MySqlConnection(connectionString))
             using (var adapter = new MySqlDataAdapter(query, connection))

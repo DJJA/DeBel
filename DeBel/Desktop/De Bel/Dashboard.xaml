@@ -7,12 +7,17 @@
         mc:Ignorable="d"
         Title="Dashboard" Height="500" Width="800" ContentRendered="Window_ContentRendered">
     <Grid>
-        <TabControl>
-            <TabItem Header="Log">
+        <TabControl Margin="0,0,0,35">
+            <!--<TabItem Header="Log">-->
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="Event Log" MouseLeftButtonDown="tabLog_Clicked" HorizontalAlignment="Stretch"/>
+                </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
                     <local:LogControl x:Name="tabLogControl"/>
                 </Grid>
             </TabItem>
+            <!--</TabItem>-->
             <TabItem Header="Doorbells">
                 <Grid Background="#FFE5E5E5">
                     <local:DoorbellsControl x:Name="tabDoorbellControl"/>
@@ -29,6 +34,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-
+        <Button x:Name="btnLogOut" Content="Log out" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="btnLogOut_Click"/>
+        <Label x:Name="lblLoggedInAs" Margin="10,0,90,0" VerticalAlignment="Bottom" Height="35" HorizontalContentAlignment="Right"/>
     </Grid>
 </Window>
