@@ -188,15 +188,16 @@ namespace De_Bel
         public List<Building> GetBuildings()
         {
             var list = new List<Building>();
-            string query = "SELECT * FROM Building b, Buidling_Person bp WHERE b.ID = bp.Building_ID AND bp.Person_ID = @Person_ID ORDER BY Street ASC;";
+            //string query = "SELECT * FROM Building b, Building_Person bp WHERE b.ID = bp.Building_ID AND bp.Person_ID = @Person_ID ORDER BY Street ASC;";
             //string query = "SELECT * FROM Building ORDER BY Street ASC;";
+            string query = "SELECT * FROM building WHERE ID IN( SELECT DISTINCT Building_ID FROM doorbell WHERE ID IN( SELECT Doorbell_ID FROM `doorbell_person` WHERE Person_ID = @Person_ID ) )";
 
             using (var connection = new MySqlConnection(connectionString))
             using (var adapter = new MySqlDataAdapter(query, connection))
             {
                 connection.Open();
 
-                //adapter.SelectCommand.Parameters.AddWithValue("@Person_ID", Id);
+                adapter.SelectCommand.Parameters.AddWithValue("@Person_ID", Id);
 
                 var dt = new DataTable();
                 adapter.Fill(dt);

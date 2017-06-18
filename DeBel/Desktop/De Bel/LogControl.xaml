@@ -8,16 +8,11 @@
              d:DesignHeight="400" d:DesignWidth="600" Loaded="UserControl_Loaded">
     <Grid>
         <ListBox x:Name="lbLog" HorizontalAlignment="Left" Margin="10,73,0,10" Width="210" SelectionChanged="lbLog_SelectionChanged"/>
-        <Image x:Name="picFoto" HorizontalAlignment="Left" Height="140" Margin="275,46,0,0" VerticalAlignment="Top" Width="170"/>
-        <Label x:Name="lblTest" Content="Naam:" HorizontalAlignment="Left" Height="24" Margin="275,191,0,0" VerticalAlignment="Top" Width="47"/>
-        <Label x:Name="lblTest3" Content="Telnr.:" HorizontalAlignment="Left" Height="24" Margin="275,248,0,0" VerticalAlignment="Top" Width="47"/>
-        <Label x:Name="lblTest2" Content="E-mail:" HorizontalAlignment="Left" Height="24" Margin="275,220,0,0" VerticalAlignment="Top" Width="47"/>
-        <Label x:Name="lblNaam" Content="" HorizontalAlignment="Left" Height="24" Margin="327,191,0,0" VerticalAlignment="Top" Width="133"/>
-        <Label x:Name="lblEmail" Content="" HorizontalAlignment="Left" Height="24" Margin="327,220,0,0" VerticalAlignment="Top" Width="133"/>
-        <Label x:Name="lblTelnr" Content="" HorizontalAlignment="Left" Height="24" Margin="327,248,0,0" VerticalAlignment="Top" Width="133"/>
+        <Image x:Name="imgPhoto" Margin="225,10,10,51"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Building: " VerticalAlignment="Top" Height="22"/>
         <ComboBox x:Name="cboxBuilding" HorizontalAlignment="Left" Margin="67,10,0,0" VerticalAlignment="Top" Width="153" SelectionChanged="cboxBuilding_SelectionChanged"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,37,0,0" TextWrapping="Wrap" Text="Doorbell: " VerticalAlignment="Top" Height="22"/>
         <ComboBox x:Name="cboxDoorbell" HorizontalAlignment="Left" Margin="67,37,0,0" VerticalAlignment="Top" Width="153" SelectionChanged="cboxDoorbell_SelectionChanged"/>
+        <TextBlock x:Name="tblkMessage" Margin="225,0,10,10" TextWrapping="Wrap" Height="36" VerticalAlignment="Bottom"/>
     </Grid>
 </UserControl>

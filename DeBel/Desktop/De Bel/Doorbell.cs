@@ -16,7 +16,16 @@ namespace De_Bel
         public string Name { get; set; }
         public int BuildingId { get; set; }
         public List<User> Users { get; set; }
-        public List<Log> Logs { get; set; }
+        private List<Log> _logs = null;
+        public List<Log> Logs
+        {
+            get
+            {
+                if (_logs == null)
+                    _logs = GetLog();
+                return _logs;
+            }
+        }
 
         public Doorbell(int id, string name, int buildingID)
         {
@@ -230,7 +239,7 @@ namespace De_Bel
             return list;
         }
 
-        public List<Log> GetLog()
+        private List<Log> GetLog()
         {
             var list = new List<Log>();
             string query = "SELECT * FROM EventLog WHERE DoorBell_ID = @DoorBell_ID ORDER BY EventDate DESC;";
@@ -250,13 +259,19 @@ namespace De_Bel
                     try
                     {
                         int doorbellId = Convert.ToInt32(dt.Rows[i]["DoorBell_ID"]);
-                        int userId = Convert.ToInt32(dt.Rows[i]["Person_ID"]);
                         DateTime dateTime = Convert.ToDateTime(dt.Rows[i]["EventDate"]);
+
+
+                        int userId = -1; 
+                        object o = dt.Rows[i]["Person_ID"];
+                        if (o != DBNull.Value)
+                            userId = Convert.ToInt32(o);
+
 
                         string picturePath = null, errorMessage = null;
 
-                        object o = dt.Rows[i]["Picture"];
-                        if(o!= DBNull.Value)
+                        o = dt.Rows[i]["Picture"];
+                        if(o != DBNull.Value)
                             picturePath = (string)o;
                         o = dt.Rows[i]["ErrorMsg"];
                         if (o != DBNull.Value)

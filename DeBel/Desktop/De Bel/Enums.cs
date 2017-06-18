@@ -1,7 +1,7 @@
 ﻿public enum LogType
 {
     Error,
-    DoorbellRinged,
+    DoorbellRang,
     None
 }
 

@@ -27,7 +27,7 @@ namespace De_Bel
             if (String.IsNullOrEmpty(picturePath) && String.IsNullOrEmpty(errorMessage))
                 Type = LogType.None;
             else if (String.IsNullOrEmpty(errorMessage))
-                Type = LogType.DoorbellRinged;
+                Type = LogType.DoorbellRang;
             else
                 Type = LogType.Error;
 
@@ -43,21 +43,21 @@ namespace De_Bel
 
         public override string ToString()
         {
-            if(Type == LogType.None)
+            if (Type == LogType.None)
                 return "--==   " + DateTime.ToString("dd-MM-yyyy") + "   ==--";
             string logType;
-            if(!ErrorWindow)
+            if (!ErrorWindow)
             {
                 if (Type == LogType.Error)
                     logType = "Error";
                 else
-                    logType = "Doorbell Ringed";
+                    logType = "Doorbell Rang";
                 return DateTime.ToString("HH:mm:ss") + " - " + logType;
 
             }
             else
-                {
-                return DateTime.ToString("HH:mm:ss") + " - " 
+            {
+                return DateTime.ToString("HH:mm:ss") + " - "
                     + Environment.NewLine + " wat info";
             }
         }
