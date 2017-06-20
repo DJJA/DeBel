@@ -36,11 +36,6 @@ namespace De_Bel
             ErrorMessage = errorMessage;
         }
 
-        public Log(int doorbellId, int buildingId, string errormessage)
-        {
-
-        }
-
         public override string ToString()
         {
             if (Type == LogType.None)

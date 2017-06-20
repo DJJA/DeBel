@@ -34,6 +34,10 @@ namespace De_Bel
             BuildingId = buildingID;
         }
 
+        public Doorbell()
+        {
+
+        }
         public static bool UpdateDoorbells(DataTable dt)
         {
             return false;
