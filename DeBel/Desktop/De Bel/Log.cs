@@ -16,11 +16,9 @@ namespace De_Bel
         public string PicturePath { get; set; }
         public string ErrorMessage { get; set; }
 
-        public bool ErrorWindow { get; set; }
 
         public Log(int doorbellId, int userId, DateTime dateTime, string picturePath, string errorMessage)
         {
-            ErrorWindow = false;
             DoorbellId = doorbellId;
             UserId = userId;
 
@@ -38,23 +36,30 @@ namespace De_Bel
 
         public override string ToString()
         {
-            if (Type == LogType.None)
-                return "--==   " + DateTime.ToString("dd-MM-yyyy") + "   ==--";
-            string logType;
-            if (!ErrorWindow)
-            {
-                if (Type == LogType.Error)
-                    logType = "Error";
-                else
-                    logType = "Doorbell Rang";
-                return DateTime.ToString("HH:mm:ss") + " - " + logType;
+            //if (Type == LogType.None)
+            //    return "--==   " + DateTime.ToString("dd-MM-yyyy") + "   ==--";
+            //string logType;
+            //if (!ErrorWindow)
+            //{
+            //    if (Type == LogType.Error)
+            //        logType = "Error";
+            //    else
+            //        logType = "Doorbell Rang";
+            //    return DateTime.ToString("HH:mm:ss") + " - " + logType;
 
-            }
+            //}
+            //else
+            //{
+            //    return DateTime.ToString("HH:mm:ss") + " - "
+            //        + Environment.NewLine + " wat info";
+            //}
+
+            string logType;
+            if (Type == LogType.Error)
+                logType = "Error";
             else
-            {
-                return DateTime.ToString("HH:mm:ss") + " - "
-                    + Environment.NewLine + " wat info";
-            }
+                logType = "Doorbell Rang";
+            return DateTime.ToString("HH:mm:ss") + " - " + logType;
         }
 
         public static List<Log> AddDataLabelsToMatchesList(List<Log> logEntries)
@@ -71,7 +76,7 @@ namespace De_Bel
                 if (lastDate.Date != list[i].DateTime.Date)
                 {
                     lastDate = list[i].DateTime.Date;
-                    list.Insert(i, new Log(-1, -1, lastDate, null, null));
+                    list.Insert(i, new LogDateLabel(-1, -1, lastDate, null, null));
                 }
             }
             return list;
