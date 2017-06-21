@@ -14,7 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Management;
-
+using System.Net;
+using System.IO;
+using MySql.Data.MySqlClient;
 
 namespace CommunicationLink
 {
@@ -24,7 +26,7 @@ namespace CommunicationLink
     public partial class MainWindow : Window
     {
 
-
+        private string connectionString = @"Server=studmysql01.fhict.local;Uid=dbi377967;Database=dbi377967;Pwd=bossmonster;";
         private SerialMessenger serialMessenger;
         private System.Timers.Timer readMessageTimer;
 
@@ -49,8 +51,55 @@ namespace CommunicationLink
                 AutoReset = true,
             };
             readMessageTimer.Elapsed += ReadMessageTimer_Tick;
+            CheckFTP();
+
+        }
+
+        private string CheckFTP()
+        {
+            string result = "";
+            string serverpath = "ftp://i377919@iris.fhict.nl/domains/i377919.iris.fhict.nl/public_html/PT12";
+            FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(serverpath);
+            ftpRequest.KeepAlive = true;
+            ftpRequest.UsePassive = true;
+            ftpRequest.UseBinary = true;
+            
+            ftpRequest.Method = WebRequestMethods.Ftp.ListDirectory;
+            ftpRequest.Credentials = new NetworkCredential("i377919","Bossmonsters");
+
+            FtpWebResponse response = (FtpWebResponse)ftpRequest.GetResponse();
+            StreamReader streamReader = new StreamReader(response.GetResponseStream());
+            string line = streamReader.ReadLine();
+            while (!string.IsNullOrEmpty(line))
+            {
+                if (line.Contains(".jpg"))
+                { 
+                    lstbtemp.Items.Add(line);
+                    //AddToSQL(line);
+                }
+                
+                line = streamReader.ReadLine();
+            }
+
+            
 
 
+
+            return result;
+        }
+
+        private void AddToSQL(string path)
+        {
+            string query = "";
+
+            using (var connection = new MySqlConnection(connectionString))
+            using (var command = new MySqlCommand(query, connection))
+            {
+                connection.Open();
+                command.Parameters.AddWithValue("@PathToFile", path);
+
+                command.ExecuteNonQuery();
+            }
         }
 
 
@@ -92,6 +141,9 @@ namespace CommunicationLink
         }
 
 
+        
+
+
         private string AutodetectArduinoPort()
         {
             ManagementScope connectionScope = new ManagementScope();
@@ -117,6 +169,18 @@ namespace CommunicationLink
             }
 
             return null;
+        }
+
+        private void lstbtemp_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        { 
+            var fullFilePath = @"http://i377919.iris.fhict.nl/" + lstbtemp.SelectedItem.ToString();
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
+            bitmap.EndInit();
+
+            imgtemp.Source = bitmap;
+
         }
     }
 }
