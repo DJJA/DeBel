@@ -68,26 +68,21 @@ namespace CommunicationLink
 
         private void ProcessReceivedMessage(string message)
         {
-            if (message == "ARDUINO_CONTROL")
-            {
-                
+            if (message == "A_LIVE")
+            { 
 
             }
-            else if (message.StartsWith("RED_STATUS:"))
+            else if (message.StartsWith("RPI_LIVE"))
             {
 
             }
-            else if (message.StartsWith("GREEN_STATUS:"))
+            else if (message.StartsWith("RPI_NOTLIVE"))
             {
                 
             }
-            else if (message.StartsWith("BLUE_STATUS:"))
+            else if (message.StartsWith("CHECKFTP"))
             {
                 
-            }
-            else if (message.StartsWith("SEND_VALUE_"))
-            {
-               
             }
         }
 
