@@ -21,7 +21,7 @@ namespace De_Bel
     /// </summary>
     public partial class DoorbellsControl : UserControl
     {
-        public delegate void mouseup_delegate(object obj, MouseButtonEventArgs args);
+        //public delegate void mouseup_delegate(object obj, MouseButtonEventArgs args);
 
         private bool userMadeChanges = false;
 

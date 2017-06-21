@@ -62,18 +62,24 @@ namespace De_Bel
             }
         }
 
-        public static List<Log> AddDataLabelsToMatchesList(List<Log> LogEntries)
+        public static List<Log> AddDataLabelsToMatchesList(List<Log> logEntries)
         {
-            DateTime lastDate = DateTime.MaxValue;
-            for (int i = 0; i < LogEntries.Count; i++)
+            var list = new List<Log>();
+            foreach (var item in logEntries)
             {
-                if (lastDate.Date != LogEntries[i].DateTime.Date)
+                list.Add(item);
+            }
+
+            var lastDate = DateTime.MaxValue;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (lastDate.Date != list[i].DateTime.Date)
                 {
-                    lastDate = LogEntries[i].DateTime;
-                    LogEntries.Insert(i, new Log(-1, -1, lastDate, null, null));
+                    lastDate = list[i].DateTime.Date;
+                    list.Insert(i, new Log(-1, -1, lastDate, null, null));
                 }
             }
-            return LogEntries;
+            return list;
         }
     }
 }
