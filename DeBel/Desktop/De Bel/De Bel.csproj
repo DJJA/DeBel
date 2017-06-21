@@ -85,6 +85,8 @@
     <Compile Include="LogControl.xaml.cs">
       <DependentUpon>LogControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LogDateLabel.cs" />
+    <Compile Include="LogErrorLabel.cs" />
     <Compile Include="RemoveDoorbellDialog.xaml.cs">
       <DependentUpon>RemoveDoorbellDialog.xaml</DependentUpon>
     </Compile>
