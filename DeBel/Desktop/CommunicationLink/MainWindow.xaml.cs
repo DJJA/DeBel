@@ -29,6 +29,7 @@ namespace CommunicationLink
         private string connectionString = @"Server=studmysql01.fhict.local;Uid=dbi377967;Database=dbi377967;Pwd=bossmonster;";
         private SerialMessenger serialMessenger;
         private System.Timers.Timer readMessageTimer;
+        private string serverpath = "ftp://i377919@iris.fhict.nl/domains/i377919.iris.fhict.nl/public_html/PT12";
 
         public MainWindow()
         {
@@ -51,14 +52,20 @@ namespace CommunicationLink
                 AutoReset = true,
             };
             readMessageTimer.Elapsed += ReadMessageTimer_Tick;
-            CheckFTP();
-
+            List<string> defaultPics = GetPictureList();
+            List<string> newPics = defaultPics;
+            while (defaultPics.Count == newPics.Count)
+            {
+                newPics = GetPictureList();
+            }
+            var newPic = newPics.First();
+            AddToSQL(newPic);
         }
 
-        private string CheckFTP()
+        private List<string> GetPictureList()
         {
-            string result = "";
-            string serverpath = "ftp://i377919@iris.fhict.nl/domains/i377919.iris.fhict.nl/public_html/PT12";
+            List<string> pics = new List<string>();
+
             FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(serverpath);
             ftpRequest.KeepAlive = true;
             ftpRequest.UsePassive = true;
@@ -74,30 +81,27 @@ namespace CommunicationLink
             {
                 if (line.Contains(".jpg"))
                 { 
-                    lstbtemp.Items.Add(line);
+                    pics.Add(line);
                     //AddToSQL(line);
                 }
                 
                 line = streamReader.ReadLine();
             }
 
-            
-
-
-
-            return result;
+            return pics;
         }
 
         private void AddToSQL(string path)
         {
-            string query = "";
+            string query = "INSERT INTO eventlog(Picture,EventDate,Doorbell_ID) VALUES(@Picture, @Time,@ID)";
 
             using (var connection = new MySqlConnection(connectionString))
             using (var command = new MySqlCommand(query, connection))
             {
                 connection.Open();
-                command.Parameters.AddWithValue("@PathToFile", path);
-
+                command.Parameters.AddWithValue("@Picture", "http://i377919.iris.fhict.nl/"  + path);
+                command.Parameters.AddWithValue("@ID", 1);
+                command.Parameters.AddWithValue("@Time", DateTime.Now);
                 command.ExecuteNonQuery();
             }
         }
@@ -133,6 +137,10 @@ namespace CommunicationLink
             {
                 
             }
+            else if (message.StartsWith("RANG"))
+            {
+
+            }
         }
 
 
@@ -158,7 +166,7 @@ namespace CommunicationLink
                     }
                 }
             }
-            catch (ManagementException e)
+            catch (ManagementException)
             {
                 /* Do Nothing */
             }
