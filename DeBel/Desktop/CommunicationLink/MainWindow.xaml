@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <ListBox x:Name="lstbtemp" HorizontalAlignment="Left" Height="200" Margin="10,10,0,0" VerticalAlignment="Top" Width="233" SelectionChanged="lstbtemp_SelectionChanged"/>
+        <Image x:Name="imgtemp" HorizontalAlignment="Left" Height="200" Margin="248,10,0,0" VerticalAlignment="Top" Width="259"/>
+
 
     </Grid>
 </Window>
