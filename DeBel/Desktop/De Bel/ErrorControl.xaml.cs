@@ -20,19 +20,15 @@ namespace De_Bel
     /// </summary>
     public partial class ErrorControl : UserControl
     {
-        //Doorbell doorbell = new Doorbell();
         public ErrorControl()
         {
             InitializeComponent();
-            //List<Log> error = doorbell.GetErrors();
-            //lbError.ItemsSource = Log.AddDataLabelsToMatchesList(doorbell.Logs);
+            
         }
 
         private void ErrorControl1_Loaded(object sender, RoutedEventArgs e)
         {
-            //lbError.ItemsSource = Log.AddDataLabelsToMatchesList(doorbell.Logs);
-            //if (lbError.Items.Count > 1)
-            //    lbError.SelectedIndex = 1;
+            
         }
     }
 }
