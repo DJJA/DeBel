@@ -18,7 +18,7 @@ namespace De_Bel
 
         public override string ToString()
         {
-            return DateTime.ToString("dd-MM-yyyy HH:mm:ss - " + BuildingName + " - " + DoorbellName + ": " + ErrorMessage);
+            return DateTime.ToString("dd-MM-yyyy HH:mm:ss - ") + BuildingName + " - " + DoorbellName + ": " + ErrorMessage;
         }
     }
 }
