@@ -8,13 +8,17 @@ namespace De_Bel
 {
     public class LogErrorLabel : Log
     {
-        public LogErrorLabel(int doorbellId, int userId, DateTime dateTime, string picturePath, string errorMessage) : base(doorbellId, userId, dateTime, picturePath, errorMessage)
+        public string BuildingName { get; set; }
+        public string DoorbellName { get; set; }
+        public LogErrorLabel(string street, string houseNumber, string doorbellName, DateTime dateTime, string errorMessage) : base(null, -1, dateTime, null, errorMessage)
         {
+            BuildingName = street + " " + houseNumber;
+            DoorbellName = doorbellName;
         }
 
         public override string ToString()
         {
-            return base.ToString();
+            return DateTime.ToString("dd-MM-yyyy HH:mm:ss - " + BuildingName + " - " + DoorbellName + ": " + ErrorMessage);
         }
     }
 }

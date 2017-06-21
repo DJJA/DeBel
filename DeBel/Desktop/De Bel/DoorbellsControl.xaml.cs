@@ -69,7 +69,7 @@ namespace De_Bel
                 if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
                 {
                     var building = (Building)cbboxBuildings.SelectedItem;
-                    var doorbell = new Doorbell(-1, dialog.DoorbellName, building.Id);
+                    var doorbell = new Doorbell(-1, dialog.DoorbellName, building);
                     if (doorbell.AddDoorbell())
                     {
                         MessageBox.Show("Doorbell added to the database.");

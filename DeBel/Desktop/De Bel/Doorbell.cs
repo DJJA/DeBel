@@ -15,6 +15,7 @@ namespace De_Bel
         public int Id { get; set; }
         public string Name { get; set; }
         public int BuildingId { get; set; }
+        public Building Building { get; set; }
         public List<User> Users { get; set; }
         private List<Log> _logs = null;
         public List<Log> Logs
@@ -27,11 +28,11 @@ namespace De_Bel
             }
         }
 
-        public Doorbell(int id, string name, int buildingID)
+        public Doorbell(int id, string name, Building building)
         {
             Id = id;
             Name = name;
-            BuildingId = buildingID;
+            this.Building = building;
         }
 
         public Doorbell()
@@ -211,38 +212,6 @@ namespace De_Bel
             return success;
         }
 
-        public List<Log> GetErrors()
-        {
-            var list = new List<Log>();
-            string query = "SELECT * FROM EventLog WHERE DoorBell_ID = @DoorBell_ID AND Error IS NOT NULL;";
-
-            using (var connection = new MySqlConnection(connectionString))
-            using (var adapter = new MySqlDataAdapter(query, connection))
-            {
-                connection.Open();
-
-                adapter.SelectCommand.Parameters.AddWithValue("@DoorBell_ID", Id);
-
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    try
-                    {
-                        int doorbellId = Convert.ToInt32(dt.Rows[i]["DoorBell_ID"]);
-                        int userId = Convert.ToInt32(dt.Rows[i]["Person_ID"]);
-                        DateTime dateTime = new DateTime(Convert.ToInt64(dt.Rows[i]["EventDate"]));
-                        string picturePath = (string)dt.Rows[i]["Picture"];
-                        string errorMessage = (string)dt.Rows[i]["Error"];
-                        list.Add(new Log(doorbellId, userId, dateTime, picturePath, errorMessage));
-                    }
-                    catch (Exception) { }
-                }
-            }
-            return list;
-        }
-
         private List<Log> GetLog()
         {
             var list = new List<Log>();
@@ -281,7 +250,7 @@ namespace De_Bel
                         if (o != DBNull.Value)
                             errorMessage = (string)o;
 
-                        list.Add(new Log(doorbellId, userId, dateTime, picturePath, errorMessage));
+                        list.Add(new Log(this, userId, dateTime, picturePath, errorMessage));
                     }
                     catch (Exception ex) { Debug.WriteLine(ex.Message); }
                 }

@@ -155,7 +155,7 @@ namespace De_Bel
                         int id = Convert.ToInt32(dt.Rows[i]["ID"]);
                         int buildingID = Convert.ToInt32(dt.Rows[i]["Building_ID"]);
                         string name = (string)dt.Rows[i]["doorbellName"];
-                        list.Add(new Doorbell(id, name, buildingID));
+                        list.Add(new Doorbell(id, name, this));
                     }
                     catch (Exception ex) { Debug.WriteLine(ex.Message); }
                 }
@@ -187,7 +187,7 @@ namespace De_Bel
                         int id = Convert.ToInt32(dt.Rows[i]["doorbell_ID"]);
                         int buildingID = Convert.ToInt32(dt.Rows[i]["Building_ID"]);
                         string name = (string)dt.Rows[i]["doorbellName"];
-                        list.Add(new Doorbell(id, name, buildingID));
+                        list.Add(new Doorbell(id, name, this));
                     }
                     catch (Exception ex) { Debug.WriteLine(ex.Message); }
                 }

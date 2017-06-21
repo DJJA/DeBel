@@ -30,6 +30,7 @@ namespace De_Bel
         {
             tabLogControl.Refresh();
             InitDoorbellsControll();
+            tabErrorControl.lbError.ItemsSource = Log.GetErrors();
         }
 
         private void InitDoorbellsControll()

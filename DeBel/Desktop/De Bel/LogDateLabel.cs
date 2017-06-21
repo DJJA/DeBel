@@ -8,7 +8,7 @@ namespace De_Bel
 {
     public class LogDateLabel : Log
     {
-        public LogDateLabel(int doorbellId, int userId, DateTime dateTime, string picturePath, string errorMessage) : base(doorbellId, userId, dateTime, picturePath, errorMessage)
+        public LogDateLabel(Doorbell doorbell, int userId, DateTime dateTime, string picturePath, string errorMessage) : base(doorbell, userId, dateTime, picturePath, errorMessage)
         {
 
         }

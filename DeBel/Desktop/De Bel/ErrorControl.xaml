@@ -6,6 +6,6 @@
              xmlns:local="clr-namespace:De_Bel"
              mc:Ignorable="d" Height="312" Width="652.8" Loaded="ErrorControl1_Loaded">
     <Grid>
-        <ListBox x:Name="lbError" HorizontalAlignment="Left" Margin="10,0,-186,10.4" Width="644"/>
+        <ListBox x:Name="lbError" Margin="0,0,-1.333,0"/>
     </Grid>
 </UserControl>
