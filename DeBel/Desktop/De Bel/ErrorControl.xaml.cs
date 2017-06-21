@@ -26,9 +26,10 @@ namespace De_Bel
             
         }
 
-        private void ErrorControl1_Loaded(object sender, RoutedEventArgs e)
+        public void Refresh()
         {
-            
+            lbError.ItemsSource = null;
+            lbError.ItemsSource = Log.GetErrors();
         }
     }
 }

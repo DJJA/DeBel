@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:De_Bel"
-             mc:Ignorable="d" Height="312" Width="652.8" Loaded="ErrorControl1_Loaded">
+             mc:Ignorable="d" Height="312" Width="652.8">
     <Grid>
         <ListBox x:Name="lbError"/>
     </Grid>

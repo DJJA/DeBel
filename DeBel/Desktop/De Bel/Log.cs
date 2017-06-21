@@ -89,7 +89,7 @@ namespace De_Bel
         public static List<LogErrorLabel> GetErrors()
         {
             var list = new List<LogErrorLabel>();
-            string query = "SELECT b.Street, b.HouseNumber, d.DoorBellName, e.EventDate, e.ErrorMsg FROM eventlog e, doorbell d, building b WHERE e.DoorBell_ID = d.ID AND d.Building_ID = B.ID AND e.ErrorMsg IS NOT NULL;";
+            string query = "SELECT b.Street, b.HouseNumber, d.DoorBellName, e.EventDate, e.ErrorMsg FROM eventlog e, doorbell d, building b WHERE e.DoorBell_ID = d.ID AND d.Building_ID = B.ID AND e.ErrorMsg IS NOT NULL ORDER BY e.eventdate DESC;";
 
             using (var connection = new MySqlConnection(connectionString))
             using (var adapter = new MySqlDataAdapter(query, connection))
