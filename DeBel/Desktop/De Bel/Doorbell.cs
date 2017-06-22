@@ -75,7 +75,7 @@ namespace De_Bel
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 success = false;
             }
@@ -99,7 +99,7 @@ namespace De_Bel
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 success = false;
             }
@@ -134,7 +134,7 @@ namespace De_Bel
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 success = false;
             }
@@ -205,7 +205,7 @@ namespace De_Bel
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 success = false;
             }

@@ -40,24 +40,6 @@ namespace De_Bel
 
         public override string ToString()
         {
-            //if (Type == LogType.None)
-            //    return "--==   " + DateTime.ToString("dd-MM-yyyy") + "   ==--";
-            //string logType;
-            //if (!ErrorWindow)
-            //{
-            //    if (Type == LogType.Error)
-            //        logType = "Error";
-            //    else
-            //        logType = "Doorbell Rang";
-            //    return DateTime.ToString("HH:mm:ss") + " - " + logType;
-
-            //}
-            //else
-            //{
-            //    return DateTime.ToString("HH:mm:ss") + " - "
-            //        + Environment.NewLine + " wat info";
-            //}
-
             string logType;
             if (Type == LogType.Error)
                 logType = "Error";
@@ -103,13 +85,6 @@ namespace De_Bel
                 {
                     try
                     {
-                        //int doorbellId = Convert.ToInt32(dt.Rows[i]["DoorBell_ID"]);
-                        //int userId = Convert.ToInt32(dt.Rows[i]["Person_ID"]);
-                        //DateTime dateTime = new DateTime(Convert.ToInt64(dt.Rows[i]["EventDate"]));
-                        //string picturePath = (string)dt.Rows[i]["Picture"];
-                        //string errorMessage = (string)dt.Rows[i]["Error"];
-                        //list.Add(new LogErrorLabel(this, userId, dateTime, picturePath, errorMessage));
-
                         var street = (string)dt.Rows[i]["street"];
                         var houseNumber = Convert.ToInt32(dt.Rows[i]["houseNumber"]).ToString();
                         var doorbellName = (string)dt.Rows[i]["DoorbellName"];

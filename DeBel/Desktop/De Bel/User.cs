@@ -11,6 +11,9 @@ namespace De_Bel
 {
     public class User : Database
     {
+        private static MySqlConnection connection = new MySqlConnection
+        (connectionString);
+
         public static User CurrentUser { get; set; }    // Holds the user that's currently logged in
 
         public int Id { get; set; }
@@ -61,11 +64,6 @@ namespace De_Bel
             }
             return list;
         }
-
-        MySqlCommandBuilder builder;
-
-        private static MySqlConnection connection = new MySqlConnection
-        (connectionString);
 
         public User(int id, string name, string email, string username, string password, int phonenumber, bool adminstatus)
         {
@@ -170,29 +168,6 @@ namespace De_Bel
             { update = false; }
             return update;
         }
-
-        //public static List<Doorbell> GetDoorbells(Building b)
-        //{
-
-        //}
-
-        //public List<User> GetUsers(Building b)
-        //{
-        //    DataTable dt;
-        //    string query = "SELECT * FROM Person";
-
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
-        //    {
-        //        connection.Open();
-
-        //        //adapter.SelectCommand.Parameters.AddWithValue("@FilterValue", filterValue);
-
-        //        dt = new DataTable();
-        //        adapter.Fill(dt);
-        //    }
-        //    return dt;
-        //}
 
         public List<Building> GetBuildings()
         {

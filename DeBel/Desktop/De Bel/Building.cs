@@ -62,16 +62,11 @@ namespace De_Bel
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 success = false;
             }
             return success;
-        }
-
-        public bool UpdateBuilding()
-        {
-            return false;
         }
 
         public bool RemoveBuilding()
@@ -91,7 +86,7 @@ namespace De_Bel
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 success = false;
             }
@@ -200,18 +195,15 @@ namespace De_Bel
             return Street + " " + HouseNumber;
         }
 
-        public static List<Building> GetBuildings()                    // This is in the wrong place
+        public static List<Building> GetBuildings()
         {
             var list = new List<Building>();
-            //string query = "SELECT * FROM Building b, Buidling_Person bp WHERE b.ID = bp.Building_ID AND bp.Person_ID = @Person_ID;";
             string query = "SELECT * FROM Building ORDER BY Street ASC;";
 
             using (var connection = new MySqlConnection(connectionString))
             using (var adapter = new MySqlDataAdapter(query, connection))
             {
                 connection.Open();
-
-                //adapter.SelectCommand.Parameters.AddWithValue("@Person_ID", Id);
 
                 var dt = new DataTable();
                 adapter.Fill(dt);
@@ -221,11 +213,9 @@ namespace De_Bel
                     try
                     {
                         int id = Convert.ToInt32(dt.Rows[i]["ID"]);
-                        //int companyID = Convert.ToInt32(dt.Rows[i]["Company_ID"]);
                         string street = (string)dt.Rows[i]["Street"];
                         string zipcode = (string)dt.Rows[i]["Zipcode"];
                         int houseNumber = Convert.ToInt32(dt.Rows[i]["HouseNumber"]);
-                        //var houseNumber = (string)dt.Rows[i]["HouseNumber"];
                         list.Add(new Building(id, -1, street, zipcode, houseNumber));
                     }
                     catch (Exception) { }
