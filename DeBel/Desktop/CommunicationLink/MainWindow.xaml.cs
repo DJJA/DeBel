@@ -52,7 +52,15 @@ namespace CommunicationLink
                 AutoReset = true,
             };
             readMessageTimer.Elapsed += ReadMessageTimer_Tick;
-            serialMessenger.SendMessage("CHECK");
+            try
+            {
+                serialMessenger.SendMessage("CHECK");
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No Arduino connected");
+            }
             checkFTP();
 
         }
@@ -77,9 +85,9 @@ namespace CommunicationLink
             ftpRequest.KeepAlive = true;
             ftpRequest.UsePassive = true;
             ftpRequest.UseBinary = true;
-            
+
             ftpRequest.Method = WebRequestMethods.Ftp.ListDirectory;
-            ftpRequest.Credentials = new NetworkCredential("i377919","Bossmonsters");
+            ftpRequest.Credentials = new NetworkCredential("i377919", "Bossmonsters");
 
             FtpWebResponse response = (FtpWebResponse)ftpRequest.GetResponse();
             StreamReader streamReader = new StreamReader(response.GetResponseStream());
@@ -87,11 +95,11 @@ namespace CommunicationLink
             while (!string.IsNullOrEmpty(line))
             {
                 if (line.Contains(".jpg"))
-                { 
+                {
                     pics.Add(line);
                     //AddToSQL(line);
                 }
-                
+
                 line = streamReader.ReadLine();
             }
 
@@ -106,7 +114,7 @@ namespace CommunicationLink
             using (var command = new MySqlCommand(query, connection))
             {
                 connection.Open();
-                command.Parameters.AddWithValue("@Picture", "http://i377919.iris.fhict.nl/"  + path);
+                command.Parameters.AddWithValue("@Picture", "http://i377919.iris.fhict.nl/" + path);
                 command.Parameters.AddWithValue("@ID", 1);
                 command.Parameters.AddWithValue("@Time", DateTime.Now);
                 command.ExecuteNonQuery();
@@ -147,7 +155,7 @@ namespace CommunicationLink
         }
 
 
-        
+
 
 
         private string AutodetectArduinoPort()
@@ -178,7 +186,7 @@ namespace CommunicationLink
         }
 
         private void lstbtemp_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        { 
+        {
             var fullFilePath = @"http://i377919.iris.fhict.nl/" + lstbtemp.SelectedItem.ToString();
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
