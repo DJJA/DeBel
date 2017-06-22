@@ -52,6 +52,13 @@ namespace CommunicationLink
                 AutoReset = true,
             };
             readMessageTimer.Elapsed += ReadMessageTimer_Tick;
+            serialMessenger.SendMessage("CHECK");
+            checkFTP();
+
+        }
+
+        void checkFTP()
+        {
             List<string> defaultPics = GetPictureList();
             List<string> newPics = defaultPics;
             while (defaultPics.Count == newPics.Count)
@@ -122,24 +129,20 @@ namespace CommunicationLink
         private void ProcessReceivedMessage(string message)
         {
             if (message == "A_LIVE")
-            { 
-
+            {
+                MessageBox.Show("Arduino is live!");
             }
             else if (message.StartsWith("RPI_LIVE"))
             {
-
+                MessageBox.Show("RPI is live!");
             }
             else if (message.StartsWith("RPI_NOTLIVE"))
             {
-                
-            }
-            else if (message.StartsWith("CHECKFTP"))
-            {
-                
+                MessageBox.Show("RPI is NOT live!");
             }
             else if (message.StartsWith("RANG"))
             {
-
+                checkFTP();
             }
         }
 
