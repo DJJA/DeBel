@@ -48,5 +48,10 @@ namespace De_Bel
         {
             tabLogControl.Refresh();
         }
+
+        private void tabError_Clicked(object sender, MouseButtonEventArgs e)
+        {
+            tabErrorControl.Refresh();
+        }
     }
 }

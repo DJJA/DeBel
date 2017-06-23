@@ -21,7 +21,7 @@ namespace De_Bel
     /// </summary>
     public partial class DoorbellsControl : UserControl
     {
-        public delegate void mouseup_delegate(object obj, MouseButtonEventArgs args);
+        //public delegate void mouseup_delegate(object obj, MouseButtonEventArgs args);
 
         private bool userMadeChanges = false;
 
@@ -69,7 +69,7 @@ namespace De_Bel
                 if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
                 {
                     var building = (Building)cbboxBuildings.SelectedItem;
-                    var doorbell = new Doorbell(-1, dialog.DoorbellName, building.Id);
+                    var doorbell = new Doorbell(-1, dialog.DoorbellName, building);
                     if (doorbell.AddDoorbell())
                     {
                         MessageBox.Show("Doorbell added to the database.");

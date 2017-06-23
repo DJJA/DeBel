@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -99,24 +100,32 @@ namespace De_Bel
                     SaveUsername();
                 if (chkbxPassword.IsChecked == true)
                     SavePassword();
-                var user = User.LogInCheck(tboxUsername.Text, tboxPassword.Password);
-                if (user != null)
-                {
-                    User.CurrentUser = user;
-                    if(user.AdminStatus)
-                    {
-                        var dashboard = new Dashboard();
-                        dashboard.Show();
-                    }
-                    else
-                    {
-                        var dashboard = new UserDashboard();
-                        dashboard.Show();
-                    }
-                    this.Close();
-                }
-                else MessageBox.Show("Username and Password don't match");
 
+                try
+                {
+                    var user = User.LogInCheck(tboxUsername.Text, tboxPassword.Password);
+                    if (user != null)
+                    {
+                        User.CurrentUser = user;
+                        if (user.AdminStatus)
+                        {
+                            var dashboard = new Dashboard();
+                            dashboard.Show();
+                        }
+                        else
+                        {
+                            var dashboard = new UserDashboard();
+                            dashboard.Show();
+                        }
+                        this.Close();
+                    }
+                    else MessageBox.Show("Username and Password don't match");
+
+                }
+                catch(MySqlException)
+                {
+                    MessageBox.Show("Could not connect to the server.");
+                }
             }
             else MessageBox.Show("Please enter a username and password.");
         }

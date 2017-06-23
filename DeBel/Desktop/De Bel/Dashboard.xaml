@@ -28,7 +28,10 @@
                     <local:UsersControl/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Errors">
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="Errors" MouseLeftButtonDown="tabError_Clicked" HorizontalAlignment="Stretch"/>
+                </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
                     <local:ErrorControl x:Name="tabErrorControl" Margin="68,38,68,49.4"/>
                 </Grid>

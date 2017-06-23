@@ -23,7 +23,13 @@ namespace De_Bel
         public ErrorControl()
         {
             InitializeComponent();
+            
+        }
 
+        public void Refresh()
+        {
+            lbError.ItemsSource = null;
+            lbError.ItemsSource = Log.GetErrors();
         }
     }
 }

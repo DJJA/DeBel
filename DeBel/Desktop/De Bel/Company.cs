@@ -16,15 +16,5 @@ namespace De_Bel
         {
 
         }
-
-        //public bool AddBuilding(Building b)
-        //{
-
-        //}
-
-        //public bool RemoveBuilding(Building b)
-        //{
-
-        //}
     }
 }

@@ -69,12 +69,16 @@ namespace De_Bel
             if (e.AddedItems.Count > 0)
             {
                 var log = (Log)e.AddedItems[0];
-                if(log.Type == LogType.DoorbellRang)
+                if (log.Type == LogType.DoorbellRang)
                 {
-                    imgPhoto.Source = new BitmapImage(new Uri(log.PicturePath));
+                    try
+                    {
+                        imgPhoto.Source = new BitmapImage(new Uri(log.PicturePath));
+                    }
+                    catch (Exception) { }
                     tblkMessage.Text = "Someone rang the doorbell at " + log.DateTime.ToString("HH:mm:ss");
                 }
-                else if(log.Type == LogType.Error)
+                else if (log.Type == LogType.Error)
                 {
                     tblkMessage.Text = "ERROR: " + log.ErrorMessage;
                 }

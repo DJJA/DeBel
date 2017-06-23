@@ -11,6 +11,9 @@ namespace De_Bel
 {
     public class User : Database
     {
+        private static MySqlConnection connection = new MySqlConnection
+        (connectionString);
+
         public static User CurrentUser { get; set; }    // Holds the user that's currently logged in
 
         public int Id { get; set; }
@@ -54,18 +57,13 @@ namespace De_Bel
                         int id = Convert.ToInt32(dt.Rows[i]["DoorBell_ID"]);
                         int buildingID = Convert.ToInt32(dt.Rows[i]["Building_ID"]);
                         string name = (string)dt.Rows[i]["doorbellName"];
-                        list.Add(new Doorbell(id, name, buildingID));
+                        list.Add(new Doorbell(id, name, null));
                     }
                     catch (Exception) { }
                 }
             }
             return list;
         }
-
-        MySqlCommandBuilder builder;
-
-        private static MySqlConnection connection = new MySqlConnection
-        (connectionString);
 
         public User(int id, string name, string email, string username, string password, int phonenumber, bool adminstatus)
         {
@@ -85,20 +83,27 @@ namespace De_Bel
 
         public static User LogInCheck(string username, string password)
         {
-            string query = "SELECT * FROM Person WHERE Username = '" + username + "' AND PersonPassword = '" + password + "'";
-            MySqlDataAdapter sda = new MySqlDataAdapter(query, connection);
-            DataTable dtbl = new DataTable();
-            sda.Fill(dtbl);
-            if (dtbl.Rows.Count == 1)
+            try
             {
-                int id = Convert.ToInt32(dtbl.Rows[0]["ID"]);
-                string name = (string)dtbl.Rows[0]["PersonName"];
-                string email = (string)dtbl.Rows[0]["EMail"];
-                int phoneNumber = Convert.ToInt32(dtbl.Rows[0]["PhoneNumber"]);
-                string usrname = (string)dtbl.Rows[0]["Username"];
-                string pssword = (string)dtbl.Rows[0]["PersonPassword"];
-                bool adminStatus = Convert.ToBoolean(dtbl.Rows[0]["AdminStatus"]);
-                return new User(id, name, email, usrname, pssword, phoneNumber, adminStatus);
+                string query = "SELECT * FROM Person WHERE Username = '" + username + "' AND PersonPassword = '" + password + "'";
+                MySqlDataAdapter sda = new MySqlDataAdapter(query, connection);
+                DataTable dtbl = new DataTable();
+                sda.Fill(dtbl);
+                if (dtbl.Rows.Count == 1)
+                {
+                    int id = Convert.ToInt32(dtbl.Rows[0]["ID"]);
+                    string name = (string)dtbl.Rows[0]["PersonName"];
+                    string email = (string)dtbl.Rows[0]["EMail"];
+                    int phoneNumber = Convert.ToInt32(dtbl.Rows[0]["PhoneNumber"]);
+                    string usrname = (string)dtbl.Rows[0]["Username"];
+                    string pssword = (string)dtbl.Rows[0]["PersonPassword"];
+                    bool adminStatus = Convert.ToBoolean(dtbl.Rows[0]["AdminStatus"]);
+                    return new User(id, name, email, usrname, pssword, phoneNumber, adminStatus);
+                }
+            }
+            catch (MySqlException mySqlException)
+            {
+                throw mySqlException;
             }
             return null;
         }
@@ -163,29 +168,6 @@ namespace De_Bel
             { update = false; }
             return update;
         }
-
-        //public static List<Doorbell> GetDoorbells(Building b)
-        //{
-
-        //}
-
-        //public List<User> GetUsers(Building b)
-        //{
-        //    DataTable dt;
-        //    string query = "SELECT * FROM Person";
-
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
-        //    {
-        //        connection.Open();
-
-        //        //adapter.SelectCommand.Parameters.AddWithValue("@FilterValue", filterValue);
-
-        //        dt = new DataTable();
-        //        adapter.Fill(dt);
-        //    }
-        //    return dt;
-        //}
 
         public List<Building> GetBuildings()
         {
